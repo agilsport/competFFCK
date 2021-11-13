@@ -1,4 +1,4 @@
-# competFFCK ![alt text](https://github.com/agilsport/competFFCK/blob/main/img/32x32_ffck.png "Logo FFCK")
+# competFFCK ![alt text](https://raw.githubusercontent.com/agilsport/competFFCK/main/32x32_ffck.png "Logo FFCK")
 
 ## Développement et Resources pour le logiciel competFFCK
 

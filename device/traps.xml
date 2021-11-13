@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<panel name="config">
+		<padding all="2px" />
+		<col value="2,3"/>
+
+		<row value="auto" />
+		<statictext col_start="1" align="right" label="Adresse IP" />
+		<textctrl col_start="2" align="left" name="address"/>
+
+		<row value="auto" />
+		<statictext col_start="1" align="right" label="Port" />
+		<textctrl col_start="2" align="left" name="port"/>
+
+		<toolbar row="auto" col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+	</panel>
+</root>
+

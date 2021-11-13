@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+<!-- image_list Saison -->
+<image_list name="saison">
+	<ok image="./res/32x32_bullet_green.png" />
+	<ko image="./res/32x32_bullet_red.png" />
+</image_list>
+
+<!-- ranking_status -->
+<ranking_status>
+	<ranking status="ok" chrono="1" order="1" code="" label="Classé" code_inter="QLF" label_inter="CLASSIFIED" />
+	<ranking status="zero" chrono="0" order="1" code="Nt" label="Non-Traité" code_inter="NQ" label_inter="NOT TREATED" />
+	<ranking status="ko" chrono="-1" order="999" code="-" label="Non-Classé" code_inter="NQ" label_inter="NOT-CLASSIFIED" />
+
+	<ranking status="nq" chrono="-400" order="101" code="Nq" label="Non-Qualifié" code_inter="NQ"  label_inter="NOT QUALIFIED" />
+	<ranking status="dnf" chrono="-500" order="102" code="Abd" label="Abandon" code_inter="DNF" label_inter="DID NOT FINISH" />
+	<ranking status="dsq" chrono="-800" order="103" code="Dsq" label="Disqualifié" code_inter="DSQ" label_inter="DISQUALIFIED" />
+	<ranking status="dns" chrono="-600" order="104" code="Abs" label="Absent" code_inter="DNS" label_inter="DID NOT START" />
+	<ranking status="out" chrono="-610" order="105" code="Out" label="Hors Course" code_inter="OUT" label_inter="OUT" />
+	
+	<ranking status="des" chrono="-700" order="2" code="Des" label="Dessalé" />
+	<ranking status="abscm" chrono="-10000" order="201" code="Abs.CM" label="Abs. Certificat Médical" />
+	<ranking status="dis" chrono="-11000" order="202" code="Dis" label="Dispensé" />
+	<ranking status="ray" chrono="-12000" order="203" code="Ray" label="Rayé " />
+
+	<ranking status="chute" chrono="-300" order="3" code="Chute" label="Chute" />
+</ranking_status>
+
+<statusbar>
+	<padding all="0px"/>
+	<spacing all="0"/>
+	<row h="1" />
+	<lua>
+		bk_mode = bk_mode or 'gradient_line_vert';
+		bk_color_start = bk_color_start or 'dkgray';
+		bk_color_end = bk_color_end or 'ltgray';
+		font_color = font_color or 'white';
+	</lua>
+	<background mode="(bk_mode)" color_start="(bk_color_start)" color_end="(bk_color_end)"/>
+	<font color="(font_color)" weight="bold" />
+
+	<matrix col="50px" name="display">
+		<image col="24px" adjust="none">'./res/24x24_display.png'</image>
+		<text col="1" align="left" spacing_horz="4" name="text_display" />
+	</matrix>
+	<line col="1px" pen_size="1" pen_color="ltgray" border="left" />
+	<matrix col="1">
+		<image col="28px" adjust="none" spacing_left="4">'./res/24x24_login.png'</image>
+		<text col="1" align="left" spacing_horz="4" name="text_identification">'Aucune Identification'</text>
+	</matrix>
+	<line col="1px" pen_size="1" pen_color="ltgray" border="left" />
+	<matrix col="2">
+		<image col="28px" adjust="none" spacing_left="4">'./res/24x24_network.png'</image>
+		<text col="1" align="left" spacing_horz="4" name="text_network" />
+	</matrix>
+	<line col="1px" pen_size="1" pen_color="ltgray" border="left" />
+	<matrix col="4">
+		<image col="28px" adjust="none" spacing_left="4" name="image_info">'./res/24x24_information.png'</image>
+		<text col="1" align="left" spacing_horz="4" name="text_info" />
+	</matrix>
+	<image col="24px" adjust="none">'./res/24x24_ffck.png'</image>
+</statusbar>
+
+<!-- Configuration Globale -->
+<panel name="config_global">
+	<padding all="2px"/>
+	<propertygridmanager row="1" col="1" name="pg" style="PG_BOLD_MODIFIED|PG_SPLITTER_AUTO_CENTER|PG_TOOLBAR|PG_DESCRIPTION" />
+	<toolbar row="auto" col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+</panel>
+
+<!-- Identification Login - Password -->
+<panel name="identification">
+	<padding all="2px"/>
+	<wnd name="statictext" style="ALIGN_RIGHT" />
+	
+	<row value="auto" />
+	<statictext col="2" label="Login" />
+	<textctrl col="2" name="login" style="TE_LEFT" />
+	
+	<row value="auto" />
+	<statictext col_start="1" label="Mot de Passe" />
+	<textctrl name="pwd" style="TE_LEFT|TE_PASSWORD" />
+
+	<row value="auto" />
+	<checkbox col_start="1" col_end="0" name="remember_pwd" label="Se souvenir du Mot de Passe" style="CHK_2STATE|ALIGN_RIGHT" />
+
+	<row value="auto" />
+	<statictext col_start="1" label="Site Web" />
+	<hyperlinkctrl col_start="2" name="hyperlink_web" />
+	
+	<row value="auto" />
+	<toolbar col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+</panel>
+
+<!-- Configuration Mode Serveur  -->
+<panel name="config_socket_server">
+	<padding all="2px" />
+	<wnd name="statictext" style="ALIGN_RIGHT" />
+
+	<col value="1,1"/>
+	
+	<row value="auto"/>
+	<checkbox col_start="1" col_end="0" name="activation" label="Activation du Mode Serveur" style="CHK_2STATE|ALIGN_RIGHT" />
+
+	<row value="auto"/>
+	<statictext col_start="1" label="IP ou Nom du PC" />
+	<textctrl col_start="2" name="ip" style="ALIGN_LEFT"/>
+
+	<row value="auto"/>
+	<statictext col_start="1" label="Port" />
+	<textctrl col_start="2" name="port" style="ALIGN_RIGHT"/>
+	
+	<row value="auto"/>
+	<toolbar col_start="1" col_end="0" name="tb" style="TB_FLAT,TB_HORIZONTAL,TB_TEXT" />
+</panel>
+
+<!-- Configuration Mode Client  -->
+<panel name="config_socket_client">
+	<padding all="2px" />
+	<wnd name="statictext" style="ALIGN_RIGHT" />
+
+	<col value="1,1"/>
+	
+	<row value="auto"/>
+	<checkbox col_start="1" col_end="0" name="activation" label="Activation du Mode Client" style="CHK_2STATE|ALIGN_RIGHT" />
+
+	<row value="auto"/>
+	<statictext col_start="1" label="IP ou Nom du Serveur" />
+	<textctrl col_start="2" name="ip" style="ALIGN_LEFT"/>
+
+	<row value="auto"/>
+	<statictext col_start="1" label="Port" />
+	<textctrl col_start="2" name="port" style="ALIGN_RIGHT"/>
+	
+	<row value="auto"/>
+	<toolbar col_start="1" col_end="0" name="tb" style="TB_FLAT,TB_HORIZONTAL,TB_TEXT" />
+</panel>
+
+<!-- Surclassement -->
+<panel name="surclassement">
+	<padding all="2px"/>
+	<wnd name="statictext" style="ALIGN_RIGHT" />
+
+	<col w="1"/>
+	<col w="2"/>
+	
+	<row value="auto" />
+	<statictext col_start="1" label="Activite" />
+	<combotable col_start="2" name="combo_activite" />
+
+	<row value="auto" />
+	<statictext col_start="1" label="Saison" />
+	<combotable col_start="2" name="combo_saison" />
+
+	<row value="auto" />
+	<statictext col_start="1" label="Epreuve" />
+	<combotable col_start="2" name="combo_epreuve" />
+
+	<row value="auto" />
+	<searchctrl col_start="1" col_end="0" name="search_identite" style="TE_LEFT" />
+
+	<row value="auto" />
+	<staticbox col_start="1" col_end="0" label="Licencié">
+		<col w="1"/>
+		<col w="3"/>
+		
+		<row value="auto" />
+		<textctrl col_start="1" name="matric" style="TE_LEFT" />
+		<textctrl col_start="2" name="identite" style="TE_LEFT" />
+	</staticbox>
+
+	<row value="auto" />
+	<toolbar col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+</panel>
+
+<!-- Gestion Temps Manuel (Disqualifié ...) -->
+<panel name="concurrent_temps_manuel">
+	<padding all="2px"/>
+	<wnd name="statictext" style="ALIGN_RIGHT" />
+	<font weight="bold" size="12" color="black"/>
+	<background mode="gradient_line_vert" color_start="yellow" color_end="dkyellow"/>
+	<pen border="1" />
+
+	<row value="auto"/>
+	<statictext col="auto" label=" Dossard" />
+	<textctrlbutton col="80px" name="dossard" style="TE_RIGHT" />
+	<wndtext col="1" name="identite" align="center">'Dossard - Identité'</wndtext>
+
+	<row value="4px"/>
+
+	<matrix row="auto" col_start="1" col_end="0">
+		<row value="24px" />
+		<col value="8px, 1,1,1,1,1, 8px" />
+
+		<row value="auto" />
+		<statictext col_start="2" label="Temps" />
+		<textctrlbutton col_start="3" name="tps" style="TE_RIGHT" />
+		<button col_start="4" name="dsq" label="DSQ" />
+		<statictext col_start="5" label="Porte(s)/ DSQ" />
+		<textctrl col_start="6" name="porte" style="TE_LEFT" />
+
+		<lua>for i=1,nb_inter do</lua>
+			<row value="auto" />
+			<statictext col_start="2" label="('Inter-'..i)" />
+			<textctrlbutton col_start="3" name="('inter'..i)" style="TE_RIGHT" />
+		<lua>end</lua>
+		<row value="8px" />
+		<staticbox row_start="1" row_end="0" col_start="1" col_end="0" label="('Manche '..manche)" /> 
+	</matrix>
+	
+	<row value="4px"/>
+	<row value="1"/>
+	<grid col_start="1" col_end="0" name="grid" />
+	<row value="4px"/>
+
+	<matrix col_start="1" col_end="0" row="24px">
+		<statictext col="auto" label=" Message" />
+		<background mode="gradient_line_vert" color_start="gray" color_end="ltgray"/>
+		<font weight="bold" size="10" color="dkgreen"/>
+		<wndtext col="1" name="msg" align="center">''</wndtext>
+	</matrix>
+	<row value="4px"/>
+	
+	<row value="auto" />
+	<toolbar col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+</panel>
+
+
+<!-- chrono : Statistique Classement -->
+<panel name="chrono_stat_ranking">
+	<padding all="0px" />
+	<spacing all="1" />
+	<background mode="gradient_line_vert" color_start="white" color_end="ltgray" />
+	<font name="Calibri" size="10" weight="bold" color="DKRED" adjust="best" />
+	
+	<row value="1"/>	
+	<wndtext col="1" align="center">'TOT'</wndtext>
+	<wndtext col="1" align="center">'CLT'</wndtext>
+	<wndtext col="1" align="center">'ABS'</wndtext>
+	<wndtext col="1" align="center">'ABD'</wndtext>
+	<wndtext col="1" align="center">'DSQ'</wndtext>
+	<wndtext col="1" align="center">'NT'</wndtext>
+
+	<font color="DKBLUE" size="12" />
+	<background color_start="ltgray" color_end="white" />
+
+	<row value="1"/>	
+	<wndtext col_start="1" align="center" name='total' />
+	<wndtext col_start="2" align="center" name='ok' />
+	<wndtext col_start="3" align="center" name='dns' />
+	<wndtext col_start="4" align="center" name='dnf' />
+	<wndtext col_start="5" align="center" name='dsq' />
+	<wndtext col_start="6" align="center" name='ko' />
+</panel>
+
+<!-- Prise Server adresse IP et port -->
+<panel name="server_info">
+	<padding all="2px" />
+	<wnd name="statictext" style="ALIGN_RIGHT" />
+
+	<col value="1,1"/>
+
+	<row value="auto"/>
+	<statictext col_start="1" label="IP ou Nom du Serveur" />
+	<textctrl col_start="2" name="ip" style="ALIGN_LEFT"/>
+
+	<row value="auto"/>
+	<statictext col_start="1" label="Port" />
+	<textctrl col_start="2" name="port" style="ALIGN_RIGHT"/>
+	
+	<row value="auto"/>
+	<toolbar col_start="1" col_end="0" name="tb" style="TB_FLAT,TB_HORIZONTAL,TB_TEXT" />
+</panel>
+
+<!-- grid_browse -->
+<panel name="grid_browse">
+	<padding all="2px"/>
+	<gridadministration row="1" col_start="1" col_end="0" name="grid" />
+	<toolbar row="auto" col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+</panel>
+
+<!-- vpe Configuration -->
+<panel name="vpe_configuration">
+	<padding all="2px"/>
+	<propertygridmanager row="1" col="1" name="pg" style="PG_BOLD_MODIFIED|PG_SPLITTER_AUTO_CENTER|PG_TOOLBAR" />
+	<toolbar row="auto" col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+</panel>
+
+<!-- vpe Property -->
+<panel name="vpe_property">
+	<padding all="2px"/>
+	<propertygridmanager row="1" col="1" name="pg" style="PG_BOLD_MODIFIED|PG_SPLITTER_AUTO_CENTER" />
+	<toolbar row="auto" col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+</panel>
+
+<panel name="about">
+	<padding all="2px"/>
+	<propertygridmanager row="1" col="1" name="pg" style="PG_BOLD_MODIFIED|PG_SPLITTER_AUTO_CENTER" />
+	<toolbar row="auto" col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+</panel>
+
+<panel name="duel_config">
+	<padding all="2px"/>
+	<wnd name="statictext" style="ALIGN_RIGHT" />
+
+	<col value="3,2"/>
+
+	<row value="auto" />
+	<statictext col_start="1" label="Format de Temps" />
+	<combobox col_start="2" name="combo_fmt_time" style="ALIGN_LEFT" />
+
+	<row value="auto" />
+	<statictext col_start="1" label="Presentation" />
+	<combobox col_start="2" name="combo_presentation" style="ALIGN_LEFT" />
+
+	<row value="auto" />
+	<statictext col_start="1" label="Finale B" />
+	<checkbox col_start="2" name="check_final_b" label="" style="CHK_2STATE|ALIGN_LEFT" />
+	
+	<row value="auto" />
+	<statictext col_start="1" label="Largeur Duel (px)" />
+	<spinctrl col_start="2" name="spin_largeur_duel" style="ALIGN_RIGHT|SP_ARROW_KEYS" />
+	
+	<row value="auto" />
+	<statictext col_start="1" label="Hauteur Couloir (px)"/>
+	<spinctrl col_start="2" name="spin_hauteur_couloir" style="ALIGN_RIGHT|SP_ARROW_KEYS" />
+
+	<row value="1" />
+	<grid col_start="1" col_end="0" name="grid" />
+
+	<row value="auto" />
+	<toolbar col_start="1" col_end="0" name="tb" style="TB_FLAT|TB_HORIZONTAL|TB_TEXT" />
+</panel>
+
+<panel name="duel">
+	<font name="calibri" weight="bold" size="10" color="black" align="center"/>
+	<pen border="1" />
+	<padding all="0px" />
+	<spacing horz="2" />
+
+	<lua>
+		height_label_tour = height_label_tour or 18;
+		height_separator_duel = height_separator_duel or 2;
+		height_couloir = height_couloir or 20;
+
+		width_duel = width_duel or 600;
+		width_separaror_duel = width_separaror_duel or 20;
+		
+		nb_tour = GetNbTour();
+		presentation = presentation or 'club';
+	</lua>
+	
+	<row h="1"/>
+	<lua>for tour=1,nb_tour do</lua>
+		<col w="1"/>
+	<lua>end</lua>
+
+	<lua>for tour=1,nb_tour do</lua>
+		<matrix col_start="(tour)">
+			<col p="width_duel" />
+			<col c="width_separaror_duel" />
+			<lua>nb_duel = GetNbDuel(tour)</lua>
+
+			<row c="height_label_tour" />
+			<background mode="solid" color="ltgray" >
+				<wndtext col_start="1" font_color="red" font_size_step="1" border="1">GetLabelTour(tour)</wndtext>
+			</background>
+
+			<row c="height_separator_duel" />
+
+			<lua>for duel=1,nb_duel do</lua>
+				
+				<row h="1" />
+				<row h="4" cond="tour == nb_tour and duel == 1" />
+				
+				<lua>nb_couloir = GetNbCouloir(tour, duel)</lua>
+				<row c="(nb_couloir+1)*height_couloir"/>
+
+				<matrix col_start="1">
+					<col w="3,3,4,20" /> <!-- btn, couloir, bib, identity -->
+					<col cond="presentation == 'team'" w="15" />
+					<col cond="presentation == 'club'" w="16" />
+					<col cond="presentation == 'nation'" w="4" />
+					<col cond="presentation == 'progression'" w="10" />
+					<col w="10,4" /> <!-- time, rk -->
+					
+					<row h="1"/>
+					<background mode="solid" color="yellow">
+						<font size_step="-1">
+							<wndtext col_start="2">'C.'</wndtext>
+							<wndtext col_start="3">'Dos'</wndtext>
+							<wndtext col_start="4">'Bateau'</wndtext>
+							<wndtext col_start="5" cond="presentation == 'nation'">'Nat'</wndtext>
+							<wndtext col_start="5" cond="presentation == 'team'">'Equipe'</wndtext>
+							<wndtext col_start="5" cond="presentation == 'progression'">'Progression'</wndtext>
+							<wndtext col_start="5" cond="presentation == 'club'">'Club'</wndtext>
+							<wndtext col_start="-1">'Temps'</wndtext>
+							<wndtext col_start="0">'Clt'</wndtext>
+						</font>
+					</background>
+					
+					<background mode="solid" color="white">
+						<lua>for couloir=1,nb_couloir do</lua>
+							<row h="1"/>
+							<lua>local label = string.format('_%-d_%-d_%-d', tour, duel, couloir)</lua>
+							<wndtext col_start="2" font_color="yellow" bk_color="black" pen_color="dkgray">couloir</wndtext>
+							<wndtext col_start="3" name="('bib'..label)" align="right">GetText(tour, duel, couloir, 'Dossard')</wndtext>
+							<wndtext col_start="4" name="('name'..label)" align="left">GetText(tour, duel, couloir, 'Bateau')</wndtext>
+							
+							<wndtext col_start="5" name="('nation'..label)" cond="presentation == 'nation'">GetText(tour, duel, couloir, 'Code_pays')</wndtext>
+							<wndtext col_start="5" name="('team'..label)" cond="presentation == 'team'">GetText(tour, duel, couloir, 'Equipe')</wndtext>
+							<wndtext col_start="5" name="('progression'..label)" cond="presentation == 'progression'">GetLabelProgression(tour, duel, couloir)</wndtext>
+							<wndtext col_start="5" name="('club'..label)" cond="presentation == 'club'">GetText(tour, duel, couloir, 'Club')</wndtext>
+
+							<textctrlbutton col_start="-1" name="('time'..label)" style="TE_RIGHT"/>
+							<wndtext col_start="0" name="('rk'..label)" bk_color="dkred" font_color="white" align="right" />
+						<lua>end</lua>
+					</background>
+					<button col_start="1" row_start="1" row_end="0" label="('D'..tostring(duel))" style="TE_LEFT" name="(string.format('btn_duel_%-d_%-d', tour, duel))" />
+				</matrix>
+
+				<row c="height_separator_duel" />
+				
+				<row h="1" />
+				<row h="4" cond="tour == nb_tour and duel == nb_duel" />
+			<lua>end</lua>
+		</matrix>
+	<lua>end</lua>
+</panel>
+
+</root>

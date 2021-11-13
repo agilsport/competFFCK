@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Editions Activité "DES" !-->
+
+<!-- Version du 17 juin 2021 par Boris !-->
+
+<edition>
+	<menu>
+		<menu title="Participants" image="./res/32x32_juges.png">
+			<menu title="Liste des participants par Epreuve" image="./res/16x16_list.png" id="lst_bateaux_epreuve" />
+			<menu title="Liste des participants par Club" image="./res/16x16_list.png" id="lst_bateaux_club" />  
+			<menu title="Liste des dossards par Club" image="./res/16x16_list.png" id="par_dossard_simple" />
+		</menu>
+
+		<menu title="Heures de départ" image="./res/32x32_chrono.png">
+			<menu title="Tableau Horaire" image="./res/24x24_clock.png">
+				<menu title="Tableau de Bord des Horaires" action="horaire" image="./res/16x16_clock.png" id="horaire" />
+			</menu>	
+			<menu title="Manche en cours, ou Manche unique (Classique, Mass Start, M1, Q1, Finale...)" image="./res/16x16_info.png">
+				<menu title="Listes de Départ par Epreuve" image="./res/16x16_bib.png" id="lst_départ_Phase" />
+				<menu title="Listes de Départ par Club" image="./res/16x16_bib.png" id="lst_départ_Phase_Club" />
+				<menu title="Listes de Départ par Epreuve Pour Doublage" image="./res/16x16_bib.png" id="lst_départ_Phase_Doublage" />
+			</menu>	
+			<menu title="Manches Multiples (Sprint)" image="./res/16x16_info.png">
+				<menu title="Listes de Départ par Epreuve" image="./res/16x16_bib.png" id="lst_départ_Sprint" />
+				<menu title="Listes de Départ par Club" image="./res/16x16_bib.png" id="lst_départ_Sprint_Club" />
+				<menu title="Listes de Départ par Epreuve Pour Doublage" image="./res/16x16_bib.png" id="lst_départ_Sprint_Doublage" />
+			</menu>	
+		</menu>
+
+		<menu title="Résultats" image="./res/32x32_ranking.png">
+			<menu title="Manche en cours, ou Manche unique (Classique, Mass Start, M1, Q1, Finale...)" image="./res/16x16_info.png">	
+				<menu title="Résultats Provisoires" image="./res/16x16_official.png" id="res_manche" />
+				<menu title="Résultats Officiels" image="./res/16x16_official.png" id="res_manche_officiels" />
+				<menu title="Résultats Officiels avec Points" image="./res/16x16_official.png" id="res_manche_points" />
+			</menu>
+			<menu title="Sprint sans Finale" image="./res/16x16_info.png">
+				<menu title="Résultats Provisoires Sprint Meilleurs des 2 Manches" image="./res/16x16_official.png" id="res_best_phase" />
+				<menu title="Résultats Officiels Sprint Meilleurs des 2 Manches" image="./res/16x16_official.png" id="res_best_officiels" />
+				<menu title="Résultats Officiels Sprint Meilleurs des 2 Manches avec Points" image="./res/16x16_official.png" id="res_best_phase_points" />
+			</menu>
+			<menu title="Sprint avec Finale" image="./res/16x16_info.png">	
+				<menu title="Résultats Complets Sprint avec Finale (Course 1)" image="./res/16x16_official.png" id="res_complet" />
+			</menu>
+		</menu>
+	</menu>
+
+	<!-- header standard !-->
+	<header>
+		<spacing all="0"/>
+		<background mode="transparent"/>
+		<font name="Calibri" size="12" adjust="max" weight="bold"/>
+		<col w="1"/>
+		<text row="auto" align="center" font_size_step="4">$(Competition.Nom)</text>
+		<text row="auto" align="center">$(Competition.Ville)</text>
+		<text row="auto" align="center" font_size_step="-2">'Du '..$(Competition.Date_debut)..' au '..$(Competition.Date_fin)</text>
+		<row h="0.2cm"/>
+		<text row="auto" align="center" font_size_step="1">title</text>
+		<row h="0.3cm"/>
+	</header>
+
+	<!-- first_header : uniquement sur la premiere page !-->
+	<first_header>
+		<lua>if id:sub(1,4) == 'res_' then</lua>
+			<col w="1,1cm,1"/>
+			<row h="auto"/> 
+			<matrix col_start="1">
+				<!-- Resultats => Informations sur les points et temps de base ...-->
+				<pen color="black" size="1" border="1"/>
+				<font name="Calibri" size="9" adjust="max"/>
+				<col w="1,2,2" />
+				
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'Epreuve'</text>
+				<text col_start="2" align="center" font_weight="bold">'Tps.Base'</text>
+				<text col_start="3" align="center" font_weight="bold">'Coeff'</text>
+				
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'K1H'</text>
+				<text col_start="2" align="center" cond="TB_K1H ~= nil" >app.TimeToString(TB_K1H.TB*1000)</text>
+				<text col_start="3" align="center" cond="alphaK1H ~= nil">string.format('%.3f', alphaK1H)</text>
+
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'K1D'</text>
+				<text col_start="2" align="center" cond="TB_K1D ~= nil">app.TimeToString(TB_K1D.TB*1000)</text>
+				<text col_start="3" align="center" cond="alphaK1D ~= nil">string.format('%.3f', alphaK1D)</text>
+
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'C1H'</text>
+				<text col_start="2" align="center" cond="TB_C1H ~= nil">app.TimeToString(TB_C1H.TB*1000)</text>
+				<text col_start="3" align="center" cond="alphaC1H ~= nil">string.format('%.3f', alphaC1H)</text>
+
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'C1D'</text>
+				<text col_start="2" align="center" cond="TB_C1D ~= nil">app.TimeToString(TB_C1D.TB*1000)</text>
+				<text col_start="3" align="center" cond="alphaC1D ~= nil">string.format('%.3f', alphaC1D)</text>
+				
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'C2'</text>
+				<text col_start="2" align="center" cond="TB_C2 ~= nil" >app.TimeToString(TB_C2.TB*1000)</text>
+				<text col_start="3" align="center" cond="alphaC2 ~= nil">string.format('%.3f', alphaC2)</text>
+			</matrix>
+			
+			<matrix col_start="3">
+				<!-- Officiels -->
+				<pen color="black" border="0"/>
+				<font name="Calibri" size="9" adjust="max"/>
+				<col w="1,2" />
+				<row h="auto"/>
+				<text col_start="1" align="left" ></text>
+				<text col_start="2" align="left" font_weight="bold" ></text>
+				
+				<!-- Affichage du Représentant Commsission si renseigné -->
+				<lua>if GetOfficiel('DCNA', 'Identite')~="" then </lua>
+				<row h="auto"/>
+				<text col_start="1" align="left" >'Rep. Com :'</text>
+				<text col_start="2" align="left" font_weight="bold" >GetOfficiel('DCNA', 'Identite')</text>
+				<lua>end</lua>
+				
+				<!-- Affichage du R1 si renseigné -->
+				<lua>if GetOfficiel('R1', 'Identite')~="" then </lua>
+				<row h="auto"/>
+				<text col_start="1" align="left" >'R1 :'</text>
+				<text col_start="2" align="left" font_weight="bold" >GetOfficiel('R1', 'Identite')</text>
+				<lua>end</lua>
+				
+				<!-- Affichage du Gestionnnaire Informatique si renseigné -->
+				<lua>if GetOfficiel('GESTION', 'Identite')~="" then </lua>
+				<row h="auto"/>
+				<text col_start="1" align="left" >'Informatique :'</text>
+				<text col_start="2" align="left" font_weight="bold" >GetOfficiel('GESTION', 'Identite')</text>
+				<lua>end</lua>
+
+				<!-- Affichage du Juge Arbitre si renseigné -->
+				<lua>if GetOfficiel('JUGEA', 'Identite')~="" then </lua>
+				<row h="auto"/>
+				<text col_start="1" align="left" >'Juge Arbitre :'</text>
+				<text col_start="2" align="left" font_weight="bold" >GetOfficiel('JUGEA', 'Identite')</text>
+				<lua>end</lua>
+			</matrix>
+
+		<lua>end</lua>
+		<row value="0.5cm"/>
+	</first_header>
+	
+	<!-- footer standard !-->
+	<footer>
+		<background mode="transparent"/>
+		<font name="Calibri" size="8" adjust="best" weight="normal"/>
+		<pen border="none" />
+
+		<row value="auto" />
+		<matrix col_start="1">
+			<row value="auto"/>
+			<lua>info = $(Competition.Date_debut,'%2D/%2M/%4Y')..'  /  '..$(Competition.Nom)</lua>
+			<text align="left">info</text>
+		</matrix>	
+		<lua>info1 = 'Juge Arbitre : '..GetOfficiel('JUGEA', 'Identite')</lua>
+		<text align="right">info1</text>
+			
+		<line col_start="1" col_end="0" pen_size="2" pen_color="dkgray" border="bottom"/>
+		
+		<row value="auto" />
+		<matrix col_start="1">
+			<row value="auto"/>
+			<text col="auto" align="left">app.GetName()..' Version '..app.GetVersion()..'   / '</text>
+			<text col="auto" align="left">os.date('Edité le %d-%m-%Y à %H:%M:%S ')</text>
+			<image col="0.8cm" adjust="width" align="left">'./res/32x32_ffck.png'</image>
+			<image col="0.6cm" adjust="width" align="left">'./res/32x32_agil.png'</image>
+		</matrix>	
+		<text align="right">string.format('Page %d/%s',editor:GetPageCurrent(), editor:GetPageCountLabel())</text>
+		<line col_start="1" col_end="0" border="top" />
+	</footer>
+
+	<!--  Liste des participants par Epreuve  -->
+	<report id="lst_bateaux_epreuve" title="('Liste des Participants par Epreuves : '..label_course..'  '..label_phase)"  header="1" first_header="0" footer="1">
+		
+		<order key="('Code_categorie, Point, Bateau')"/>
+		<lua>page_break = 0 </lua>
+		<rupture key="Code_categorie">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>epreuve = body:GetCell('Code_categorie', row);</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'..' ('..body:GetCounterValue('Code_categorie', epreuve)..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<row h="auto"/>
+			<matrix col="36">
+				<col w="24,4,8"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+					<text col_start="2" align="center" label="S." >GetEquipier($(Code_bateau),e,'Sexe')</text> 
+					<text col_start="3" align="center" label="Naissance">GetEquipier($(Code_bateau),e,'Naissance')</text>
+				<lua>end</lua>
+			</matrix>
+			<text col="34" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			<text col="6" align="right" label="Point">$(Point)</text>
+		</body>
+	</report>
+
+	<!--  Liste des participants par Club  -->
+	<report id="lst_bateaux_club" title="('Liste des Participants par Clubs : '..label_course..'  '..label_phase)"  header="1" first_header="0" footer="1">
+		
+		<order key="('Numero_club, Bateau, Code_categorie')"/>
+		<lua>page_break = 0 </lua>
+		<rupture key="Numero_club">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>club = body:GetCell('Club', row);</lua>
+				<lua>num_club = body:GetCell('Numero_club', row);</lua>
+				<text row="auto" col="1">$(Numero_club)..' - '..club..' ('..body:GetCounterValue('Numero_club',num_club)..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<row h="auto"/>
+			<matrix col="30">
+				<col w="24,4,8"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+					<text col_start="2" align="center" label="S." >GetEquipier($(Code_bateau),e,'Sexe')</text> 
+					<text col_start="3" align="center" label="Naissance">GetEquipier($(Code_bateau),e,'Naissance')</text>
+				<lua>end</lua>
+			</matrix>
+			<lua>epreuve = $(Code_categorie)</lua>
+			<text col="34" align="left" label="Epreuve">GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			<text col="6" align="right" label="Point">$(Point)</text>
+		</body>
+	</report>
+	
+	
+	<!--  Liste des dossards par Club -->
+	<report id="par_dossard_simple" title="('Liste des Dossards par Clubs : '..label_course..'  '..label_phase)"  header="1" first_header="0" footer="1">
+		
+		<order key="Numero_club, Dossard" />
+		<lua>page_break = 0 </lua>
+		<rupture key="Numero_club">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>club = body:GetCell('Club', row);</lua>
+				<lua>num_club = body:GetCell('Numero_club', row);</lua>
+				<text row="auto" col="1">$(Numero_club)..' - '..club..' ('..body:GetCounterValue('Numero_club',num_club)..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<text col="4" align="center" label="Dos">$(Dossard)</text>
+			<text col="22" align="left" label="Bateau">$(Bateau)</text>
+			<lua>epreuve = $(Code_categorie)</lua>
+			<text col="22" align="left" label="Epreuve">GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			<text col="6" align="right" label="Point">$(Point)</text>
+		</body>
+	</report>
+
+
+	<!-- Tableau de Bord des Horaires -->
+	<report id="horaire" title="Tableau de Bord des Horaires" first_header="0" footer="0"> 
+		<margin top="250" />
+		
+		<header>
+			<spacing all="0"/>
+			<background mode="transparent"/>
+			<font name="Calibri" size="12" adjust="max" weight="bold"/>
+			<col w="1"/>
+			<text row="auto" align="center" font_size_step="4">$(Competition.Nom)</text>
+			<text row="auto" align="center">$(Competition.Ville)</text>
+			<text row="auto" align="center" font_size_step="1">title</text>
+			<row h="0.3cm"/>
+		</header>
+	
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="8" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>if $(_Type_) == '2' then</lua>
+				<text col="8" align="left" font_weight="bold" font_size_step="3" label="Epreuve">$(Libelle_court)</text>
+				<text col="10" label="Date" align="center">$(Date_epreuve)</text>
+				<!--
+				<text col="5" label="Ordre" align="center">$(Ordre)</text>
+				-->
+				<text col="5" label="Nbr. Bateau" align="center">$(Nombre)</text>
+				<text col="10" label="H. Départ" align="center" font_weight="bold" font_size_step="2">$(Heure_depart)</text>
+				<text col="10" label="H. Fin" align="center" font_weight="bold" font_size_step="2">$(Heure_depart_fin)</text>
+				<text col="15" label="Phase" align="center">$(Label_phase)</text>
+				<text col="15" label="Ecart" align="center">$(Ecart)</text>
+			<lua>else</lua>
+				<text col="1" align="center" font_weight="bold">$(_Rupture_)</text>
+			<lua>end</lua>
+		</body>
+	</report>
+
+	<!--  Liste de départ par épreuves pour une phase (manche en court) -->
+	<report id="lst_départ_Phase" title="('Liste de Départ par Epreuves : '..label_course..'  '..label_phase)" header="1" first_header="0" footer="1">
+		
+		<order key="('Heure_depart'..code_course..'_'..code_phase..', Dossard')"/>
+		<rupture key="Code_categorie">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>course_phase = code_course..'_'..code_phase</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<text col="4" align="center" label="Dos">$(Dossard)</text>
+			<matrix col="20">
+				<col w="20"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="24" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			<text col="7" align="center" label="Départ">body:GetCell('Heure_depart'..course_phase, row)</text>
+		</body>
+	</report>
+	
+	
+	<!--  Liste de départ par club pour une phase (manche en court) -->
+	<report id="lst_départ_Phase_Club" title="('Liste de Départ par Clubs : '..label_course..'  '..label_phase)" header="1" first_header="0" footer="1">
+		
+		<order key="Numero_club, Dossard" />
+		<lua>page_break = 0 </lua>
+		<rupture key="Numero_club">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>club = body:GetCell('Club', row);</lua>
+				<lua>num_club = body:GetCell('Numero_club', row);</lua>
+				<text row="auto" col="1">$(Numero_club)..' - '..$(Club)</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>course_phase = code_course..'_'..code_phase</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<text col="4" align="center" label="Dos">$(Dossard)</text>
+			<matrix col="20">
+				<col w="20"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<lua>epreuve = $(Code_categorie)</lua>
+			<text col="24" align="left" label="Epreuve">GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			<text col="7" align="center" label="Départ">body:GetCell('Heure_depart'..course_phase, row)</text>
+		</body>
+	</report>	
+	
+	
+	<!--  Liste de départ Pour Doublage pour une phase (manche en court) -->
+	<report id="lst_départ_Phase_Doublage" title="('Liste de Départ par Epreuves pour Doublage : '..label_course..'  '..label_phase)" header="1" first_header="0" footer="1">
+		
+		<order key="('Heure_depart, Dossard')"/>
+		<rupture key="Code_categorie">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>course_phase = code_course..'_'..code_phase</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<text col="4" align="center" label="Dos">$(Dossard)</text>
+			<matrix col="12">
+				<col w="15"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="12" align="left" label="Club">$(Club)</text>
+			<text col="7" align="center" label="Départ">body:GetCell('Heure_depart'..course_phase, row)</text>
+			<text col="16" align="center" label="Doublage"></text>
+		</body>
+	</report>
+	
+	
+	<!--  Liste de départ pour plusieurs phases (Sprint) -->
+	<report id="lst_départ_Sprint" title="(params.title)" header="1" first_header="0" footer="1">
+		
+		<order key="('Heure_depart, Dossard')"/>
+		<rupture key="Code_categorie">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>course_phase = code_course..'_'..code_phase</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<text col="4" align="center" label="Dos">$(Dossard)</text>
+			<matrix col="20">
+				<col w="20"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="24" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			<lua>for p=1,nb_phase do</lua>
+				<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(p)</lua>
+				<text col="7" align="center" label="('Manche.'..tostring(p))">body:GetCell('Heure_depart'..txtCoursePhase, row)</text> 
+			<lua>end</lua>
+		</body>
+	</report>
+	
+	
+	<!--  Liste de départ par club pour plusieurs phase (Sprint) -->
+	<report id="lst_départ_Sprint_Club" title="(params.title)" header="1" first_header="0" footer="1">
+		
+		<order key="('Numero_club, Dossard')" />
+		<lua>page_break = 0 </lua>
+		<rupture key="Numero_club">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>club = body:GetCell('Club', row);</lua>
+				<lua>num_club = body:GetCell('Numero_club', row);</lua>
+				<text row="auto" col="1">$(Numero_club)..' - '..$(Club)</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>course_phase = code_course..'_'..code_phase</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<text col="4" align="center" label="Dos">$(Dossard)</text>
+			<matrix col="20">
+				<col w="20"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<lua>epreuve = $(Code_categorie)</lua>
+			<text col="24" align="left" label="Epreuve">GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			<lua>for p=1,nb_phase do</lua>
+				<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(p)</lua>
+				<text col="7" align="center" label="('Manche.'..tostring(p))">body:GetCell('Heure_depart'..txtCoursePhase, row)</text> 
+			<lua>end</lua>
+		</body>
+	</report>
+	
+
+	<!--  Liste de départ pour plusieurs phase (Sprint) pour Doublage -->
+	<report id="lst_départ_Sprint_Doublage" title="(params.title)" header="1" first_header="0" footer="1">
+		
+		<order key="('Heure_depart, Dossard')"/>
+		<rupture key="Code_categorie">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>course_phase = code_course..'_'..code_phase</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<text col="4" align="center" label="Dos">$(Dossard)</text>
+			<matrix col="12">
+				<col w="16"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="12" align="left" label="Club">$(Club)</text>
+			<lua>for p=1,nb_phase do</lua>
+				<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(p)</lua>
+				<text col="7" align="center" label="('Manche.'..tostring(p))">body:GetCell('Heure_depart'..txtCoursePhase, row)</text> 
+			<lua>end</lua>
+			<text col="12" align="center" label="Doublage M1"></text>
+			<text col="12" align="center" label="Doublage M2"></text>
+		</body>
+	</report>
+		
+	
+	<!-- Résultat provisoires d'une manche en cours -->
+	<report id="res_manche" title="('Résultats Provisoires : '..label_course..'  '..label_phase)" header="1" first_header="0" footer="1">
+		
+		<order key="('Code_categorie, Tps'..tostring(code_course)..'_'..tostring(code_phase)..', Dossard')" />
+		<rupture key="Code_categorie">
+			<before>
+				<font size="12"/>
+				<row h="0.3cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(code_phase)</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<text col="4" align="center" font_weight="bold" label="Clt">body:GetCell('Cltc'..txtCoursePhase, row)</text>
+			<text col="4" align="center" font_style="italic" label="Dos">$(Dossard)</text>
+			<matrix col="18">
+				<col w="20"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="20" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			
+			<!-- Temps Inter -->
+			<lua>for inter=1,nb_inter do</lua>
+				<text col="6" align="right" label="('Inter'..inter)">body:GetCell('Tps'..txtCoursePhase..'_inter'..inter, row)</text>
+				<text col="4" align="right" label="">body:GetCell('Cltc'..txtCoursePhase..'_inter'..inter, row)</text> 
+			<lua>end</lua>
+			
+			<text col="6" align="right" font_weight="bold" label="Temps">body:GetCell('Tps'..txtCoursePhase, row)</text>
+			<text col="6" align="right" label="Ecart" font_style="italic">body:GetCell('Diffc'..txtCoursePhase, row)</text>
+		</body>
+	</report>
+
+
+	<!-- Résultat Officiel d'une manche en cours sans points -->
+	<report id="res_manche_officiels" title="('Résultats Officiels : '..label_course..'  '..label_phase)" header="1" first_header="0" footer="1">
+		
+		<order key="('Code_categorie, Tps'..tostring(code_course)..'_'..tostring(code_phase)..', Dossard')" />
+		<rupture key="Code_categorie">
+			<before>
+				<font size="12"/>
+				<row h="0.3cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(code_phase)</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<text col="4" align="center" font_weight="bold" label="Clt">body:GetCell('Cltc'..txtCoursePhase, row)</text>
+			<text col="4" align="center" font_style="italic"  label="Dos">$(Dossard)</text>
+			<matrix col="18">
+				<col w="20"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="20" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			
+			<!-- Temps Inter -->
+			<lua>for inter=1,nb_inter do</lua>
+				<text col="6" align="right" label="('Inter'..inter)">body:GetCell('Tps'..txtCoursePhase..'_inter'..inter, row)</text>
+				<text col="4" align="right" label="">body:GetCell('Cltc'..txtCoursePhase..'_inter'..inter, row)</text> 
+			<lua>end</lua>
+			
+			<text col="6" align="right" font_weight="bold" label="Temps">body:GetCell('Tps'..txtCoursePhase, row)</text>
+			<text col="6" align="right" label="Ecart" font_style="italic">body:GetCell('Diffc'..txtCoursePhase, row)</text>
+		</body>
+	</report>
+	
+	
+	<!-- Résultat officiel d'une manche en cours avec points -->
+	<report id="res_manche_points" title="('Résultats Officiels avec Points : '..label_course..'  '..label_phase)">
+	<!-- Création de 2 Colonnes : pour le Meilleur Temps et Classement Meilleur Temps  -->
+		<lua>body:AddColumn({ name = 'Tps_best', type = sqlType.CHRONO })</lua>
+		<lua>body:AddColumn({ name = 'Clt_best', type = sqlType.RANKING })</lua>
+		<!-- Calcul Meilleur Temps  -->
+		<lua>lstTps = {}; for p=1,nb_phase do table.insert(lstTps, 'Tps'..tostring(code_course)..'_'..tostring(p)) end</lua>
+		<lua>body:ComputeBestTime('Tps_best', lstTps)</lua>
+		<!-- Calcul du Classement sur le Meilleur Temps  -->
+		<lua>body:SetRanking('Clt_best', 'Code_categorie, Tps_best', 'Code_categorie')</lua>
+		<!-- Calcul des Points Descente sur le Meilleur Temps -->
+		<lua>dofile('./edition/calcul_point_descente.lua')</lua>
+		<lua>CalculPointCourse(body, code_competition, code_course, code_phase, 'Tps_best')</lua>
+		
+		<order key="('Code_categorie, Tps'..tostring(code_course)..'_'..tostring(code_phase)..', Dossard')" />
+		<rupture key="Code_categorie">
+			<before>
+				<font size="12"/>
+				<row h="0.3cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(code_phase)</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<text col="4" align="center" font_weight="bold" label="Clt">body:GetCell('Cltc'..txtCoursePhase, row)</text>
+			<text col="4" align="center" font_style="italic"  label="Dos">$(Dossard)</text>
+			<matrix col="18">
+				<col w="20"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="20" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			<text col="6" align="right" label="Temps" font_weight="bold">body:GetCell('Tps'..txtCoursePhase, row)</text>
+			<text col="6" align="right" label="Ecart" font_style="italic">body:GetCell('Diffc'..txtCoursePhase, row)</text>
+			<text col="6" align="right" label="Point" font_weight="bold">$(N_Phase,'%-.0lf')</text>
+		</body>
+	</report>
+	
+	
+	<!-- Résultats provisoires Meilleurs Temps des x Phases  -->
+	<report id="res_best_phase" title="(params.title)" header="1" first_header="0" footer="1">
+		<!-- Création de 3 Colonnes : Meilleur Temps , Classement Meilleur Temps  et Diff Meilleur Temps -->
+		<lua>body:AddColumn({ name = 'Tps_best', type = sqlType.CHRONO })</lua>
+		<lua>body:AddColumn({ name = 'Clt_best', type = sqlType.RANKING })</lua>
+		<lua>body:AddColumn({ name = 'Diff_best', type = sqlType.CHRONO, format = '[DIFF][P10]%-1h%-1m%2s.%2f' })</lua>
+		
+		<!-- Calcul Meilleur Temps  -->
+		<lua>lstTps = {}; for p=1,nb_phase do table.insert(lstTps, 'Tps'..tostring(code_course)..'_'..tostring(p)) end</lua>
+		<lua>body:ComputeBestTime('Tps_best', lstTps)</lua>
+		<!-- Calcul du Classement sur le Meilleur Temps  -->
+		<lua>body:SetRanking('Clt_best', 'Code_categorie, Tps_best', 'Code_categorie')</lua>
+	
+		<order key="Code_categorie, Tps_best, Dossard" />
+		<rupture key="Code_categorie">
+			<before>
+				<font size="12"/>
+				<row h="0.3cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+
+				<!-- Calcul du Diff sur le Meilleur Temps -->
+				<lua>body:ComputeDiffTime('Tps_best', 'Diff_best', 'body:GetCell("Code_categorie", row) == "'..epreuve..'"')</lua>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<text col="4" align="center" font_weight="bold" label="Clt">$(Clt_best)</text>
+			<text col="4" align="center" font_style="italic"  label="Dos">$(Dossard)</text>
+			<lua>
+				if group == 'label' then
+					nb_equipiers = 1;
+				else
+					nb_equipiers = GetNbEquipiers($(Code_bateau));
+				end
+			</lua>
+			<matrix col="18">
+				<col w="20" />
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="20" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			<lua>for p=1,nb_phase do</lua>
+				<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(p)</lua>
+				<text col="6" align="right" label="('Tps M'..tostring(p))">body:GetCell('Tps'..txtCoursePhase, row)</text> 
+			<lua>end</lua>
+			<text col="6" align="right" label="Meil Tps" font_weight="bold">$(Tps_best)</text> 
+			<text col="6" align="right" label="Ecart" font_style="italic">$(Diff_best)</text>
+		</body>
+	</report>
+	
+	<!-- Résultats officiels Meilleurs Temps des x Phases  -->
+	<report id="res_best_officiels" title="(params.title)" header="1" first_header="0" footer="1">
+		<!-- Création de 3 Colonnes : Meilleur Temps , Classement Meilleur Temps  et Diff Meilleur Temps -->
+		<lua>body:AddColumn({ name = 'Tps_best', type = sqlType.CHRONO })</lua>
+		<lua>body:AddColumn({ name = 'Clt_best', type = sqlType.RANKING })</lua>
+		<lua>body:AddColumn({ name = 'Diff_best', type = sqlType.CHRONO, format = '[DIFF][P10]%-1h%-1m%2s.%2f' })</lua>
+
+		<!-- Calcul Meilleur Temps  -->
+		<lua>lstTps = {}; for p=1,nb_phase do table.insert(lstTps, 'Tps'..tostring(code_course)..'_'..tostring(p)) end</lua>
+		<lua>body:ComputeBestTime('Tps_best', lstTps)</lua>
+		<!-- Calcul du Classement sur le Meilleur Temps  -->
+		<lua>body:SetRanking('Clt_best', 'Code_categorie, Tps_best', 'Code_categorie')</lua>
+		
+		<order key="Code_categorie, Tps_best, Dossard" />
+		<rupture key="Code_categorie">
+			<before>
+				<font size="12"/>
+				<row h="0.3cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+				
+				<!-- Calcul du Diff sur le Meilleur Temps -->
+				<lua>body:ComputeDiffTime('Tps_best', 'Diff_best', 'body:GetCell("Code_categorie", row) == "'..epreuve..'"')</lua>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<text col="4" align="center" font_weight="bold" label="Clt">$(Clt_best)</text>
+			<text col="4" align="center" font_style="italic"  label="Dos">$(Dossard)</text>
+			<lua>
+				if group == 'label' then
+					nb_equipiers = 1;
+				else
+					nb_equipiers = GetNbEquipiers($(Code_bateau));
+				end
+			</lua>
+			<matrix col="18">
+				<col w="20" />
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="20" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			<lua>for p=1,nb_phase do</lua>
+				<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(p)</lua>
+				<text col="6" align="right" label="('Tps M'..tostring(p))">body:GetCell('Tps'..txtCoursePhase, row)</text> 
+			<lua>end</lua>
+			<text col="6" align="right" label="Meil Tps" font_weight="bold">$(Tps_best)</text> 
+			<text col="6" align="right" label="Ecart" font_style="italic">$(Diff_best)</text>			
+		</body>
+	</report>
+	
+	
+	<!-- Résultats officiels Meilleurs Temps des x Phases avec points  -->
+	<report id="res_best_phase_points" title="(params.title)">
+		<!-- Création de 3 Colonnes : Meilleur Temps , Classement Meilleur Temps  et Diff Meilleur Temps -->
+		<lua>body:AddColumn({ name = 'Tps_best', type = sqlType.CHRONO })</lua>
+		<lua>body:AddColumn({ name = 'Clt_best', type = sqlType.RANKING })</lua>
+		<lua>body:AddColumn({ name = 'Diff_best', type = sqlType.CHRONO, format = '[DIFF][P10]%-1h%-1m%2s.%2f' })</lua>
+		<!-- Calcul Meilleur Temps  -->
+		<lua>lstTps = {}; for p=1,nb_phase do table.insert(lstTps, 'Tps'..tostring(code_course)..'_'..tostring(p)) end</lua>
+		<lua>body:ComputeBestTime('Tps_best', lstTps)</lua>
+		<!-- Calcul du Classement sur le Meilleur Temps  -->
+		<lua>body:SetRanking('Clt_best', 'Code_categorie, Tps_best', 'Code_categorie')</lua>
+		<!-- Calcul des Points Descente sur le Meilleur Temps -->
+		<lua>dofile('./edition/calcul_point_descente.lua')</lua>
+		<lua>CalculPointCourse(body, code_competition, code_course, code_phase, 'Tps_best')</lua>
+
+		<order key="Code_categorie, Tps_best, Dossard" />
+		<rupture key="Code_categorie">
+			<before>
+				<font size="12"/>
+				<row h="0.3cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+				
+				<!-- Calcul du Diff sur le Meilleur Temps -->
+				<lua>body:ComputeDiffTime('Tps_best', 'Diff_best', 'body:GetCell("Code_categorie", row) == "'..epreuve..'"')</lua>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<text col="4" align="center" font_weight="bold" label="Clt">$(Clt_best)</text>
+			<text col="4" align="center" font_style="italic"  label="Dos">$(Dossard)</text>
+			<lua>
+				if group == 'label' then
+					nb_equipiers = 1;
+				else
+					nb_equipiers = GetNbEquipiers($(Code_bateau));
+				end
+			</lua>
+			<matrix col="20">
+				<col w="20" />
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="20" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			<lua>for p=1,nb_phase do</lua>
+				<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(p)</lua>
+				<text col="6" align="right" label="('Tps M'..tostring(p))">body:GetCell('Tps'..txtCoursePhase, row)</text> 
+			<lua>end</lua>
+			<text col="6" align="right" label="Meil Tps" font_weight="bold">$(Tps_best)</text>
+			<text col="6" align="right" label="Ecart" font_style="italic">$(Diff_best)</text>
+			<text col="6" align="right" label="Point" font_weight="bold">$(N_Phase,'%-.0lf')</text> 
+		</body>
+	</report>
+	
+	
+	<!-- Résultats complets Sprint avec Finale -->
+	<report id="res_complet" title="(params.title)" header="1" first_header="0" footer="1">
+		
+		<order key="Code_categorie, Tps1_3, Tps1_1, Tps1_2, Dossard" />
+		<rupture key="Code_categorie">
+			<before>
+				<font size="12"/>
+				<row h="0.3cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<text col="4" align="center" font_style="italic"  label="Dos">$(Dossard)</text>
+			<lua>
+				if group == 'label' then
+					nb_equipiers = 1;
+				else
+					nb_equipiers = GetNbEquipiers($(Code_bateau));
+				end
+			</lua>
+			<matrix col="16">
+				<col w="20" />
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="18" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+			<text col="4" align="center" label="Clt F" font_weight="bold">$(Cltc1_3)</text>
+			<text col="7" align="center" label="Tps Finale" font_weight="bold">$(Tps1_3)</text>
+			<text col="5" align="center" label="Clt Q1">$(Cltc1_1)</text>
+			<text col="6" align="center" label="Tps Q1">$(Tps1_1)</text>
+			<text col="5" align="center" label="Clt Q2">$(Cltc1_2)</text>
+			<text col="6" align="center" label="Tps Q2">$(Tps1_2)</text>
+		</body>
+	</report>
+	
+
+</edition>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Edition des duels (DRB ...) !-->
+<edition>
+
+	<!-- header standard !-->
+	<header>
+		<spacing all="0"/>
+		<background mode="transparent"/>
+		<font name="Calibri" size="12" adjust="max" weight="bold"/>
+		<col w="1"/>
+		<text row="auto" align="center" font_size_step="4">$(Competition.Nom)</text>
+		<text row="auto" align="center">$(Competition.Ville)</text>
+		<text row="auto" align="center" font_size_step="-2">'Du '..$(Competition.Date_debut)..' au '..$(Competition.Date_fin)</text>
+		<row h="0.2cm"/>
+		<text row="auto" align="center" font_size_step="1">title</text>
+		<row h="0.3cm"/>
+	</header>
+
+	<!-- footer standard !-->
+	<footer>
+		<background mode="transparent"/>
+		<font name="Calibri" size="8" adjust="best" weight="normal"/>
+		<pen border="none" />
+
+		<row value="auto" />
+		<matrix col_start="1">
+			<row value="auto"/>
+			<lua>info = $(Competition.Date_debut,'%2D/%2M/%4Y')..'  /  '..$(Competition.Nom)</lua>
+			<text col="auto" align="left">info</text>
+		</matrix>	
+		<text align="right">info1</text>
+			
+		<line col_start="1" col_end="0" pen_size="2" pen_color="dkgray" border="bottom"/>
+		
+		<row value="auto" />
+		<matrix col_start="1">
+			<row value="auto"/>
+			<text col="auto" align="left">app.GetName()..' Version '..app.GetVersion()..'   / '</text>
+			<text col="auto" align="left">os.date('Edité le %d-%m-%Y à %H:%M:%S ')</text>
+			<image col="0.8cm" adjust="width" align="left">'./res/32x32_ffck.png'</image>
+			<image col="0.6cm" adjust="width" align="left">'./res/32x32_agil.png'</image>
+		</matrix>	
+		<text align="right">string.format('Page %d/%s',editor:GetPageCurrent(), editor:GetPageCountLabel())</text>
+		<line col_start="1" col_end="0" border="top" />
+	</footer>
+
+	<!-- duel_total -->
+	<report id="duel_total" title="Résultats Officiels" first_header="0">
+		<order key="Clt, Pts1_clt, Dossard" />
+		
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml" />
+
+			<row h="auto"/>
+			<text col="6" align="right" label="Clt" font_weight="bold" font_size_step="2">$(Clt)</text>
+			<text col="5" align="center" label="Dos.">$(Dossard)</text>
+			<text col="24" align="left" label="Nom - Prénom" font_weight="bold">$(Identite)</text> 
+			<text col="6" align="center" label="Cat." font_size_step="-1">$(Categ)</text>
+			<text col="4" align="right" label="C.Cat" font_size_step="-1">$(Cltc)</text>
+			<text col="3" align="center" label="CS">$(Comite)</text>
+			<text col="14" align="center" label="Club">$(Club)</text>
+
+			<text col="7" align="right" label="T.Qualif" >$(Tps_qualif)</text>
+			<text col="4" align="right" label="C.Q" >$(Clt_qualif)</text>
+			
+			<text col="16" align="center" label="Niveau" font_weight="bold" font_size_step="2">$(Niveau)</text>
+		</body>
+	</report>
+	
+	<!-- duel_liste -->
+	<report id="duel_liste" title="Résultats Officiels" first_header="0">
+
+		<order key="Clt, Dossard" />
+		<lua>nb_tour = GetNbTour()</lua>
+
+		<rupture key="Pts1_clt">
+			<before>
+				<font size="16"/>
+				<row value="0.5cm" />
+				<lua>tour = math.floor(body:GetCellInt('Pts1_clt', row)/10)</lua>
+				<text row="auto" col="1">GetLabelTour(tour)</text>
+			</before>
+		</rupture>
+
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml" />
+
+			<row value="auto"/>
+			<text col="6" align="right" label="Clt" font_weight="bold" font_size_step="2">$(Clt)</text>
+			<text col="5" align="center" label="Dos.">$(Dossard)</text>
+			<text col="20" align="left" label="Bateau" font_weight="bold">$(Bateau)</text> 
+			<text col="14" align="center" label="Club">$(Club)</text>
+
+			<lua>ordre_niveau = 0</lua>
+			<lua>if group == 'body'then ordre_niveau = body:GetCellInt('Pts1_clt', row) end</lua>
+
+			<lua>txt_time = ''</lua>
+			<lua>if ordre_niveau &gt;= 10 then txt_time = $(Tps_tour1)..' ('..$(Clt_tour1)..')' end </lua>
+			<text col="12" align="center" label="T.1">txt_time</text>
+
+			<lua>txt_time = ''</lua>
+			<lua>if ordre_niveau &gt;= 20 then txt_time = $(Tps_tour2)..' ('..$(Clt_tour2)..')' end </lua>
+			<text col="12" align="center" label="T.2" cond="nb_tour &gt;=2">txt_time</text>
+
+			<lua>txt_time = ''</lua>
+			<lua>if ordre_niveau &gt;= 30 then txt_time = $(Tps_tour3)..' ('..$(Clt_tour3)..')' end </lua>
+			<text col="12" align="center" label="T.3" cond="nb_tour &gt;=3">txt_time</text>
+
+			<lua>txt_time = ''</lua>
+			<lua>if ordre_niveau &gt;= 40 then txt_time = $(Tps_tour4)..' ('..$(Clt_tour4)..')' end </lua>
+			<text col="12" align="center" label="T.4" cond="nb_tour &gt;=4">txt_time</text>
+
+			<lua>txt_time = ''</lua>
+			<lua>if ordre_niveau &gt;= 49 then txt_time = $(Tps_tour5)..' ('..$(Clt_tour5)..')' end </lua>
+			<text col="12" align="center" label="T.5" cond="nb_tour &gt;=5">txt_time</text>
+
+			<line col_start="1" col_end="0" pen_size="4" border="bottom" cond="not _context_border"/>
+		</body>
+	</report>
+
+	<!-- duel_tableau -->
+	<report id="duel_tableau" title="Résultats Officiels" header="0" first_header="0" footer="0">
+		<paper orientation="landscape" />
+		<margin top="80" bottom="80" left="80" right="80" />
+		<end>
+			<font name="calibri" size="9" weight="bold" color="black" align="center"/>
+			<background mode="solid" color="white" />
+			<pen border="1" />
+
+			<lua>
+				height_label_tour = height_label_tour or 40;
+				height_label_duel = height_label_duel or 32;
+				height_separator_duel = height_separator_duel or 1;
+				height_couloir = height_couloir or 45;
+
+				width_duel = width_duel or 600;
+				width_separaror_duel = width_separaror_duel or 10;
+				
+				nb_tour = GetNbTour();
+				presentation = presentation or 'club';
+			</lua>
+	
+			<lua>for tour=1,nb_tour do</lua>
+				<col w="1"/>
+			<lua>end</lua>
+			<row c="height_label_tour" />
+			<text col_start="1" col_end="0" font_size_step="2" align="center" border="0">$(Epreuve.Code_categorie)..' - '..$(Epreuve.Sexe)</text>
+			<row h="1"/>
+			
+			<lua>for tour=1,nb_tour do</lua>
+			
+				<matrix col_start="(tour)">
+					<col p="width_duel" />
+					<col c="width_separaror_duel" />
+					<lua>nb_duel = GetNbDuel(tour)</lua>
+
+					<row c="height_label_tour" />
+					<background mode="solid" color="ltgray" >
+						<text col_start="1" font_color="red" font_size_step="1" align="center" border="1">GetLabelTour(tour)</text>
+					</background>
+
+					<row c="height_separator_duel" />
+
+					<lua>for duel=1,nb_duel do</lua>
+						
+						<row h="1" />
+						<row h="4" cond="tour == nb_tour and duel == 1" />
+
+						<row c="height_label_duel"/>
+						<lua>nb_couloir = GetNbCouloir(tour, duel)</lua>
+						<row c="(nb_couloir+1)*height_couloir"/>
+
+						<matrix col_start="1">
+							<col w="3,5,20" /> <!-- couloir, bib, identity -->
+							<col cond="presentation == 'team'" w="15" />
+							<col cond="presentation == 'club'" w="15" />
+							<col cond="presentation == 'nation'" w="4" />
+							<col cond="presentation == 'progression'" w="10" />
+							<col w="10,4" /> <!-- time, rk -->
+							
+							<row h="1"/>
+							<background mode="solid" color="Yellow">
+								<font weight="bold" size_step="-2" color="black">
+									<text col_start="1">'C.'</text>
+									<text col_start="2">'Dos'</text>
+									<text col_start="3">'Identité'</text>
+									<text col_start="4" cond="presentation == 'nation'">'Nat'</text>
+									<text col_start="4" cond="presentation == 'team'">'Equipe'</text>
+									<text col_start="4" cond="presentation == 'progression'">'Progression'</text>
+									<text col_start="4" cond="presentation == 'club'">'CS'</text>
+									<text col_start="-1">'Temps'</text>
+									<text col_start="0">'Clt'</text>
+								</font>
+							</background>
+							
+							<lua>for couloir=1,nb_couloir do</lua>
+								<row h="1"/>
+								<lua>local label = string.format('_%-d_%-d_%-d', tour, duel, couloir)</lua>
+								<text col_start="1" font_color="yellow" bk_color="black" pen_color="dkgray">couloir</text>
+								<text col_start="2" align="right">GetText(tour, duel, couloir, 'Dossard')</text>
+								<text col_start="3" align="left" font_size_step="-1">GetText(tour, duel, couloir, 'Bateau')</text>
+								
+								<text col_start="4" cond="presentation == 'nation'">GetText(tour, duel, couloir, 'Nation')</text>
+								<text col_start="4" cond="presentation == 'team'">GetText(tour, duel, couloir, 'Equipe')</text>
+								<text col_start="4" cond="presentation == 'progression'">GetLabelProgression(tour, duel, couloir)</text>
+								
+								<font weight="normal" size_step="-2" >
+									<text col_start="4" cond="presentation == 'club'">GetText(tour, duel, couloir, 'Club')</text>
+								</font>
+
+								<text col_start="-1" align="right">GetText(tour, duel, couloir, 'Tps')</text>
+								<text col_start="0" bk_color="dkred" font_color="white" align="right">GetText(tour, duel, couloir, 'Clt')</text>
+							<lua>end</lua>
+						</matrix>
+
+						<row c="height_separator_duel" />
+						
+						<row h="1" />
+						<row h="4" cond="tour == nb_tour and duel == nb_duel" />
+					<lua>end</lua>
+				</matrix>
+			<lua>end</lua>
+		</end>
+	</report>
+</edition>
+

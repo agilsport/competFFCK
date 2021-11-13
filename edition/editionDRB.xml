@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Editions Activité "DES" !-->
+<edition>
+	<menu>
+		<menu title="Tableau Horaire" image="./res/24x24_clock.png">
+			<menu title="Tableau de Bord des Horaires" action="horaire" image="./res/16x16_clock.png" id="horaire" />
+		</menu>
+
+		<menu title="Liste des participants" image="./res/24x24_user.png">
+			<menu title="Liste des participants par Club (Mode Equipiers)" image="./res/16x16_inscription.png" id="par_club" />
+			<menu title="Liste des participants par Club (Mode Simple)" image="./res/16x16_inscription.png" id="par_club_simple" />
+			<menu title="Liste des participants par Epreuve" image="./res/16x16_inscription.png" id="par_epreuve" />
+		</menu>
+
+		<menu title="Liste de départ" image="./res/32x32_chrono.png">
+		</menu>
+
+		<menu title="Résultats" image="./res/32x32_ranking.png">
+			<menu title="Résultats Meilleurs des 2 Phases" image="./res/16x16_official.png" id="res_best_phase" officiel="1"/>
+		</menu>
+	</menu>
+
+	<!-- header standard !-->
+	<header>
+		<spacing all="0"/>
+		<background mode="transparent"/>
+		<font name="Calibri" size="12" adjust="max" weight="bold"/>
+		<col w="1"/>
+		<text row="auto" align="center" font_size_step="4">$(Competition.Nom)</text>
+		<text row="auto" align="center">$(Competition.Ville)</text>
+		<text row="auto" align="center" font_size_step="-2">'Du '..$(Competition.Date_debut)..' au '..$(Competition.Date_fin)</text>
+		<row h="0.5cm"/>
+		<text row="auto" align="center">title</text>
+		<row h="0.5cm"/>
+	</header>
+
+	<!-- first_header : uniquement sur la premiere page !-->
+	<first_header>
+		<lua>if id:sub(1,4) == 'res_' then</lua>
+			<col w="1,1cm,1"/>
+			<row h="auto"/> 
+			<matrix col_start="1">
+				<!-- Resultats => Informations sur les points et temps de base ...-->
+				<pen color="black" size="1" border="1"/>
+				<font name="Calibri" size="10" adjust="max"/>
+				<col w="3,2,2" />
+				
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'Epreuve'</text>
+				<text col_start="2" align="center" font_weight="bold">'Tps.Base'</text>
+				<text col_start="3" align="center" font_weight="bold">'Coeff'</text>
+				
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'K1H'</text>
+				<text col_start="2" align="center" >app.TimeToString(TB_K1H.TB*1000)</text>
+				<text col_start="3" align="center" >string.format('%.3f', alphaK1H)</text>
+
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'K1D'</text>
+				<text col_start="2" align="center" >app.TimeToString(TB_K1D.TB*1000)</text>
+				<text col_start="3" align="center" >string.format('%.3f', alphaK1D)</text>
+
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'C1H'</text>
+				<text col_start="2" align="center" >app.TimeToString(TB_C1H.TB*1000)</text>
+				<text col_start="3" align="center" >string.format('%.3f', alphaC1H)</text>
+
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'C1D'</text>
+				<text col_start="2" align="center" >app.TimeToString(TB_C1D.TB*1000)</text>
+				<text col_start="3" align="center" >string.format('%.3f', alphaC1D)</text>
+				
+				<row h="auto"/>
+				<text col_start="1" align="center" font_weight="bold">'C2'</text>
+				<text col_start="2" align="center" >app.TimeToString(TB_C2.TB*1000)</text>
+				<text col_start="3" align="center" >string.format('%.3f', alphaC2)</text>
+			</matrix>
+			
+			<matrix col_start="3">
+				<!-- Officiels -->
+				<pen color="black" border="0"/>
+				<font name="Calibri" size="14" adjust="max"/>
+				<col w="3,1" />
+				<row h="auto"/>
+				<text col_start="1" align="left" font_weight="bold" font_size_step="4">GetOfficiel('DF', 'Identite')</text>
+				<text col_start="2" align="left" >'DF'</text>
+
+				<row h="auto"/>
+				<text col_start="1" align="left" >GetOfficiel('JUGEA', 'Identite')</text>
+				<text col_start="2" align="left" >'Juge A'</text>
+			
+			</matrix>
+
+		<lua>end</lua>
+		<row value="0.5cm"/>
+	
+	</first_header>
+	
+	<!-- footer standard !-->
+	<footer>
+		<background mode="transparent"/>
+		<font name="Calibri" size="8" adjust="best" weight="normal"/>
+		<pen border="none" />
+
+		<lua>info = $(Competition.Date_debut,'%2D/%2M/%4Y')..' / '..$(Competition.Nom)..' ('</lua>
+		<lua>info = info..$(Competition.Ville).. ') / '..$(Competition.Organisateur)</lua>
+		<text row="auto" col="1" align="left">info</text>
+		<line col_start="1" col_end="0" pen_size="2" pen_color="dkgray" border="bottom"/>
+		
+		<row value="auto" />
+		<matrix col_start="1">
+			<row value="auto"/>
+			<text col="auto" align="left">app.GetName()..' Version '..app.GetVersion()..' / '</text>
+			<text col="auto" align="left">os.date('Edité le %d-%m-%Y à %H:%M:%S ')</text>
+			<image col="0.8cm" adjust="width" align="left">'./res/32x32_ffck.png'</image>
+			<image col="0.6cm" adjust="width" align="left">'./res/32x32_agil.png'</image>
+		</matrix>	
+		<text align="right">string.format('Page %d/%s',editor:GetPageCurrent(), editor:GetPageCountLabel())</text>
+		<line col_start="1" col_end="0" border="top" />
+	</footer>
+
+	<!--  Liste des participants par Club  -->
+	<report id="par_club" title="(params.title)"  header="1" first_header="0" footer="1">
+		
+		<order key="Club, Bateau" />
+		<!-- <lua>app.GetAuiMessage():AddLineError('Nb Bat='..body:GetNbRows())</lua> -->
+		<lua>page_break = 0 </lua>
+		
+		<rupture key="Club">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="16"/>
+				<row value="0.5cm" />
+				<lua>club = body:GetCell('Club', row);</lua>
+				<text row="auto" col="1">$(Numero_club)..' - '..club..' ('..body:GetCounterValue('Club',club)..')'</text>
+			</before>
+		</rupture>
+		
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			
+			<font size="10" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			
+			<row h="auto"/>
+			
+			<text col="15" align="left" label="Code">$(Code_bateau)</text>
+			<matrix col="40">
+				<col w="40,4,12,5"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" font_weight="bold" font_size_step="2" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+					<text col_start="2" align="center" label="S." >GetEquipier($(Code_bateau),e,'Sexe')</text> 
+					<text col_start="3" align="center" label="Naissance">GetEquipier($(Code_bateau),e,'Naissance')</text> 
+					<text col_start="4" align="center" label="Type">GetEquipier($(Code_bateau),e,'Type')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="12" align="center" label="Epreuve">$(Code_categorie)</text>
+			</body>
+		
+	</report>
+	
+	
+	<!--  Liste des participants par Epreuve  -->
+	<report id="par_epreuve" title="(params.title)"  header="1" first_header="0" footer="1">
+		
+		<paper orientation="landscape" />
+		<order key="Code_categorie, Club" />
+		
+		<rupture key="Code_categorie">
+			<before>
+				<font size="14"/>
+				<row h="0.4cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			
+			<font size="10" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			
+			<row h="auto"/>
+			
+			<text col="10" align="left" label="Code">$(Code_bateau)</text>
+			<text col="25" align="left" label="Club">$(Club)</text>
+			<matrix col="40">
+				<col w="40,4,12,5"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" font_weight="bold" font_size_step="2" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+					<text col_start="2" align="center" label="S." >GetEquipier($(Code_bateau),e,'Sexe')</text> 
+					<text col_start="3" align="center" label="Naissance">GetEquipier($(Code_bateau),e,'Naissance')</text> 
+					<text col_start="4" align="center" label="Type">GetEquipier($(Code_bateau),e,'Type')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="8" align="left" label="200m">''</text>
+			<text col="8" align="left" label="500m">''</text>
+			<text col="8" align="left" label="1000m">''</text>
+
+		</body>
+		
+	</report>
+
+	
+		<!--  Liste des participants par Club : version simple -->
+	<report id="par_club_simple" title="(params.title)"  header="1" first_header="0" footer="1">
+		
+		<order key="Club, Bateau" />
+		<lua>page_break = 0 </lua>
+		
+		<rupture key="Club">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<font size="16"/>
+				<row value="0.5cm" />
+				<lua>club = body:GetCell('Club', row);</lua>
+				<text row="auto" col="1">$(Numero_club)..' - '..club..' ('..body:GetCounterValue('Club',club)..')'</text>
+			</before>
+		</rupture>
+		
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			
+			<font size="10" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			
+			<row h="auto"/>
+			
+			<text col="15" align="left" label="Code">$(Code_bateau)</text>
+			<text col="40" align="left" label="Code">$(Bateau)</text>
+			<text col="8" align="right" label="Point">$(Point)</text>
+			<text col="12" align="center" label="Epreuve">$(Code_categorie)</text>
+		</body>
+	</report>
+
+	<!-- Résultats Meilleurs Temps des x Phases  -->
+	<report id="res_best_phase" title="(params.title)">
+		<!-- Création de 2 Colonnes : pour le Meilleur Temps et Classement Meilleur Temps  -->
+		<lua>body:AddColumn({ name = 'Tps_best', type = sqlType.CHRONO })</lua>
+		<lua>body:AddColumn({ name = 'Clt_best', type = sqlType.RANKING })</lua>
+		<!-- Calcul Meilleur Temps  -->
+		<lua>lstTps = {}; for p=1,nb_phase do table.insert(lstTps, 'Tps'..tostring(code_course)..'_'..tostring(p)) end</lua>
+		<lua>body:ComputeBestTime('Tps_best', lstTps)</lua>
+		<!-- Calcul du Classement sur le Meilleur Temps  -->
+		<lua>body:SetRanking('Clt_best', 'Code_categorie, Tps_best', 'Code_categorie')</lua>
+		<!-- Calcul des Points Descente sur le Meilleur Temps -->
+		<lua>dofile('./edition/calcul_point_descente.lua')</lua>
+		<lua>CalculPointCourse(body, code_competition, code_course, code_phase, 'Tps_best')</lua>
+
+		<order key="Code_categorie, Tps_best, Dossard" />
+
+		<rupture key="Code_categorie">
+			<before>
+				<font size="14"/>
+				<row h="0.4cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="8" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			
+			<row h="auto"/>
+			<text col="4" align="center" font_weight="bold" font_size_step="1" label="Clt">$(Clt_best)</text>
+			<text col="4" align="center" font_style="italic"  label="Dos.">$(Dossard)</text>
+
+			<lua>
+				if group == 'label' then
+					nb_equipiers = 1;
+				else
+					nb_equipiers = GetNbEquipiers($(Code_bateau));
+				end
+			</lua>
+			
+			<matrix col="40">
+				<col w="24,18" />
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" font_weight="bold" font_size_step="2" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+					<text col_start="2" align="center" label="Club">GetEquipier($(Code_bateau),e,'Club')</text>
+				<lua>end</lua>
+			</matrix>
+			
+			<lua>for p=1,nb_phase do</lua>
+				<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(p)</lua>
+				<text col="6" align="right" label="('Phase.'..tostring(p))">body:GetCell('Tps'..txtCoursePhase, row)</text> 
+			<lua>end</lua>
+			<text col="7" align="right" label="M.Tps" font_weight="bold" font_size_step="1">$(Tps_best)</text> 
+			<text col="6" align="right" label="Point" font_weight="bold" font_size_step="1">$(N_Phase,'%-.0lf')</text> 
+		</body>
+	</report>
+	
+	<!-- Tableau de Bord des Horaires -->
+	<report id="horaire" title="Tableau de Bord des Horaires" header="0" first_header="0" footer="0">
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="8" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+
+			<row h="auto"/>
+			<lua>if $(_Type_) == '2' then</lua>
+				<text col="15" align="left" font_weight="bold" font_size_step="4" label="Epreuve">$(Libelle_court)</text>
+				<text col="10" label="Date" align="center">$(Date_epreuve)</text>
+				<text col="5" label="Ordre" align="right">$(Ordre)</text>
+				<text col="5" label="Nbr" align="right">$(Nombre)</text>
+				<text col="10" label="H.Départ" align="center" font_weight="bold" font_size_step="2">$(Heure_depart)</text>
+				<text col="10" label="H.Fin" align="center" font_weight="bold" font_size_step="2">$(Heure_depart_fin)</text>
+				<text col="5" label="Phase" align="center">$(Code_phase)</text>
+			<lua>else</lua>
+				<text col="1" align="center" font_weight="bold">$(_Rupture_)</text>
+			<lua>end</lua>
+		</body>
+	</report>
+
+</edition>

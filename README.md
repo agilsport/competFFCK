@@ -32,6 +32,6 @@ Sous dossier /res du répertoire principal
 <br>
 Resources internes C++ 
 ___
-Les téléchargements Officiels sont disponibles sur la page [https://www.agil.fr/canoe](https://www.agil.fr/ski) 
+Les téléchargements Officiels sont disponibles sur la page [https://www.agil.fr/canoe](https://www.agil.fr/canoe) 
 
 

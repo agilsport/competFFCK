@@ -21,11 +21,6 @@ Pour chaque activité :
 - 2 : editionXXX.suppl.xml => Edition Suppléméntaire
 - 3 : editionXXX.perso.YYY.xml => Editions personnelles 
 <br>
- 
-## Process
-Sous dossier /process du répertoire principal
-<br>
-Développements spécifiques en LUA
 
 ## Resources
 Sous dossier /res du répertoire principal

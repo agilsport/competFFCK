@@ -32,6 +32,7 @@ Sous dossier /res du répertoire principal
 <br>
 Resources internes C++ 
 ___
-Les téléchargements Officiels sont disponibles sur la page [https://www.agil.fr/canoe](https://www.agil.fr/canoe) 
+Les téléchargements Officiels sont disponibles sur la page [https://www.agil.fr/competFFCK](https://www.agil.fr/competFFCK)
+
 
 

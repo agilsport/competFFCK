@@ -498,6 +498,7 @@ function filterDossard(table, itemRow)
 		return false;
 }
 
+// SLALOM
 function SetBodyEpreuve() 
 {
 	if (canoe.GetCodeActivite() == 'SLA')
@@ -580,7 +581,7 @@ function SetBodyEpreuveSlalom()
 		})
 	});
 }
-
+// DESCENTE
 function SetBodyEpreuveDescente() 
 {
 	const tRanking = adv.GetTableUnique(wsContext.notify_ranking, 'ranking')
@@ -645,7 +646,7 @@ function SetBodyEpreuveDescente()
 
 function Init()
 {
-	wsContext.lang = 'en';
+	wsContext.lang = 'fr';
 	
 	wsContext.url = 'ws://192.168.0.18';
 //	wsContext.url = 'ws://192.168.1.10';

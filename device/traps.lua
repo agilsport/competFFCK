@@ -23,7 +23,7 @@ end
 
 -- Information : Numéro de Version, Nom, Interface
 function device.GetInformation()
-	return { version = 2.3, name = 'Serveur TRAPS', class = 'network' };
+	return { version = 2.5, name = 'Serveur TRAPS', class = 'network' };
 end	
 
 function device.OnConfiguration(node)
@@ -159,17 +159,17 @@ function ReadPacket(cb)
 	elseif #tab >= 3 and tab[1]=="chrono" then
 		local bib = tonumber(tab[2])
 		local chrono = tonumber(tab[3])
-		Alert("TRAPS: dossard "..bib.." chrono "..chrono)
+		Alert("TRAPS: Net : dossard "..bib.." chrono "..chrono)
 		AddTime(bib, chrono)
 	elseif #tab >= 3 and tab[1]=="start" then
 		local bib = tonumber(tab[2])
 		local chrono = tonumber(tab[3])
-		Alert("TRAPS: dossard "..bib.." start "..chrono)
+		Alert("TRAPS: Start : dossard "..bib.." start "..chrono)
 		AddTimePassage(bib, chrono, 0)	
 	elseif #tab >= 3 and tab[1]=="finish" then
 		local bib = tonumber(tab[2])
 		local chrono = tonumber(tab[3])
-		Alert("TRAPS: dossard "..bib.." finish "..chrono)
+		Alert("TRAPS: Finish : dossard "..bib.." finish "..chrono)
 		AddTimePassage(bib, chrono, -1)	
 	else
 		Warning("Commande inconnue: "..line)
@@ -185,12 +185,12 @@ end
 
 function AddTime(bib, chrono)
 	app.SendNotify("<bib_time>", 
-		{ time = chrono,  passage = -1, bib = bib }
+		{ time_chrono = chrono,  passage = -1, bib = bib }
 	);
 end
 
 function AddTimePassage(bib, chrono, passage)
 	app.SendNotify("<passage_add>", 
-		{ time = chrono, passage = passage, bib = bib, device = 'TRAPS' }
+		{ time_chrono = chrono, passage = passage, bib = bib, device = 'TRAPS' }
 	);
 end

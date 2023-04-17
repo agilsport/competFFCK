@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Editions Activité "SLA" V1.0 Stephane V 6.2022 version sans correction du titre -->
+<edition>
+	<menu>
+		<menu title="Liste des participants et de départ" image="./res/32x32_chrono.png">
+		<menu title="Liste des participants" image="./res/24x24_user.png">
+			<menu title="Liste des participants par Club" image="./res/16x16_inscription.png" id="participants" />
+			<menu title="Liste des dossards par Club" image="./res/16x16_inscription.png" id="lst_par_club" />
+			<menu title="Liste des dossards par Club (saut de page)" saut="1" image="./res/16x16_inscription.png" id="lst_par_club"/>
+		</menu>
+			<menu title="Tableau de Bord des Horaires" action="horaire" image="./res/16x16_clock.png" id="horaire" />
+			<menu title="Manche selectionnée, ou Manche unique" image="./res/16x16_info.png">
+				<menu type_lst="depart" type_phase="phase" title="Liste de Départ par Club" image="./res/16x16_inscription.png" id="lst_par_club" />
+				<menu type_lst="depart" type_phase="phase" title="Liste de Départ par Club (saut de page)" saut="1" image="./res/16x16_inscription.png" id="lst_par_club" />
+				<menu type_phase="phase" title="Liste de Départ" image="./res/16x16_inscription.png" id="lst_depart" />
+				<menu title="Doublage chrono" ordre='Heure' image="./res/16x16_inscription.png" id="lst_depart_doublage" /> <!--Tri par heure départ -->
+			</menu>
+			<menu title="Manches Multiples (ATTENTION : Sélectionner les différentes phases)" image="./res/16x16_info.png">
+				<menu type_lst="depart" title="Liste de Départ par Club" image="./res/16x16_inscription.png" id="lst_par_club" />
+				<menu type_lst="depart" title="Liste de Départ par Club (saut de page)" saut="1" image="./res/16x16_inscription.png" id="lst_par_club" />
+				<menu title="Liste de Départ" image="./res/16x16_inscription.png" id="lst_depart" />
+				<menu title="Doublage chrono toutes les phases" titre="Doublage chrono" image="./res/16x16_inscription.png" id="lst_depart_doublage" /> <!--Tri par dossard-->
+			</menu>
+		</menu>
+		<menu title="Résultats" image="./res/32x32_ranking.png">
+			<menu title="Résultats" image="./res/16x16_info.png">
+				
+				<menu titre = "Résultats Phase" title="Phase"  image="./res/16x16_official.png" id="res_phase" />
+				<menu titre = "Résultats Phase" title=  "Phase Detail pénalités" detail_penalite='1' image="./res/16x16_official.png" id="res_phase" />
+				<menu titre = "Résultats" title="Qualif. et Finales A et B (sélectionner toutes les phases)" type_phase='all' image="./res/16x16_official.png" id="res_phase" />
+				<menu titre = "Résultats Phase" title="Phase Masters" clt_par_categorie='1' type_clt_categorie='Masters' image="./res/16x16_official.png" id="res_phase" />
+				
+				<menu type_clt_categorie="Age_regroupe" title="Meilleurs Temps de toutes les Phases (sélectionner les phases)" image="./res/16x16_official.png" id="res_best_sum_phase" officiel="1"/>
+				<menu type_res='TotalTime' type_clt_categorie="Age_regroupe" title="Somme de toutes les Phases (sélectionner les phases)" image="./res/16x16_official.png" id="res_best_sum_phase" officiel="1"/>
+			</menu>
+			<menu title="Résultats avec/par âge" image="./res/16x16_info.png">
+				<menu titre = "Résultats Phase" title="Phase avec regroupement d'âge (U15 U18 U23 U34 M35)" type_clt_categorie='Age_regroupe'  image="./res/16x16_official.png" id="res_phase" />
+				<menu titre = "Résultats Phase" title="Phase avec les catégories d'âge (P B M C J S V)" type_clt_categorie='Age'  image="./res/16x16_official.png" id="res_phase" />
+				<menu titre = "Résultats Phase" title="Phase avec les catégories d'âge Master" type_clt_categorie='Masters'  image="./res/16x16_official.png" id="res_phase" />
+				<menu titre = "Résultats Phase par catégories d'âge" title="Phase par regroupement d'âge (U15 U18 U23 U34 M35)" clt_par_categorie='1' type_clt_categorie='Age_regroupe' image="./res/16x16_official.png" id="res_phase" />
+				<menu titre = "Résultats Phase par catégories d'âge" title="Phase par catégories d'âge (P B M C J S V)" clt_par_categorie='1' type_clt_categorie='Age' image="./res/16x16_official.png" id="res_phase" />
+				
+
+			</menu>
+			<menu title="Podiums" image="./res/16x16_info.png">
+				<menu podium='1' type_clt_categorie='Age_regroupe' aff_officiels='1' titre='Podiums' title="par embarcations avec Officiels" image="./res/16x16_official.png" id="res_phase" />
+				<menu podium='1' type_clt_categorie='Age_regroupe' titre='Podiums' title="par embarcations" image="./res/16x16_official.png" id="res_phase" />
+				<menu podium='1' type_clt_categorie='Age' clt_par_categorie='1' titre="Podiums par catégories d'âge" title="par catégories d'âge (P B M C J S V)" image="./res/16x16_official.png" id="res_phase" />
+				<menu podium='1' type_clt_categorie='Age_regroupe' clt_par_categorie='1' titre="Podiums par regroupement des catégories d'âge" title="par regroupement de catégorie d'âge (U15 U18 U23 U34 M35)" image="./res/16x16_official.png" id="res_phase" />
+				<menu podium='1' clt_par_categorie='1' type_clt_categorie='Masters' titre = "Podiums Masters" title="Masters (Sélectionner Q2-DF-F)" image="./res/16x16_official.png" id="res_phase" />
+			</menu>
+		</menu>
+	</menu>
+	
+<!-- footer standard !-->
+	<footer>
+		<background mode="transparent"/>
+		<font name="Calibri" size="8" adjust="best" weight="normal"/>
+		<pen border="none" />
+		<lua>info = $(Competition.Date_debut,'%2D/%2M/%4Y')..' / '..$(Competition.Nom)..' ('</lua>
+		<lua>info = info..$(Competition.Ville).. ') / '..$(Competition.Organisateur)</lua>
+		<text row="auto" col="1" align="left">info</text>
+		<line col_start="1" col_end="0" pen_size="2" pen_color="dkgray" border="bottom"/>
+		<row value="auto" />
+		<matrix col_start="1">
+			<row value="auto"/>
+			<text col="auto" align="left">app.GetName()..' Version '..app.GetVersion()..' / FFCK'</text>
+			<image col="0.4cm" adjust="width" align="left">'./res/32x32_ffck.png'</image>
+			<text col="auto" align="left">' / Agil Informatique'</text>
+			<image col="0.4cm" adjust="width" align="left">'./res/32x32_agil.png'</image>
+			<text col="auto" align="left">os.date(' / Edité le %d-%m-%Y à %H:%M:%S')</text>
+		</matrix>	
+		<text align="right">string.format('Page %d/%s',editor:GetPageCurrent(), editor:GetPageCountLabel())</text>
+		<line col_start="1" col_end="0" border="top" />
+	</footer>
+
+<!-- header standard !-->
+	<header>
+		<spacing all="0"/>
+		<background mode="transparent"/>
+		<font name="Calibri" size="12" adjust="max" weight="bold"/>
+		<col w="1"/>
+		<text row="auto" align="center" font_size_step="4">$(Competition.Nom)</text>
+		<text row="auto" align="center">$(Competition.Ville)</text>
+		<text row="auto" align="center" font_size_step="-2">'Du '..$(Competition.Date_debut)..' au '..$(Competition.Date_fin)</text>
+		<row h="0.5cm"/>
+		<text row="auto" align="center">title</text>
+		<row h="0.5cm"/>
+	</header>
+	<first_header />
+	
+	
+<!--  ************************************************************************************************************************************** -->
+<!--  *****************  LISTES DES PARTICIPANTS 												******************************************** -->
+<!--  ************************************************************************************************************************************** -->	
+
+<!-- ************************************************************** -->
+<!--  Liste des participants par Club  -->
+<!--  Version 6/2022 Stephane V. Ok -->
+	<report id="participants" title="Liste des participants par Club"  header="1" first_header="0" footer="1">
+		<order key="Numero_club, Bateau" />
+		<!-- <lua>app.GetAuiMessage():AddLineError('Nb Bat='..body:GetNbRows())</lua> -->
+		<lua>page_break = 0 </lua>
+		<rupture key="Numero_club">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<need h="3cm" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>club = body:GetCell('Club', row);</lua>
+				<lua>num_club = body:GetCell('Numero_club', row);</lua>
+				<text row="auto" col="1">$(Numero_club)..' - '..club..' ('..body:GetCounterValue('Numero_club',num_club)..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			<row h="auto"/>
+			<text col="15" align="left" label="Code">$(Code_bateau)</text>
+			<matrix col="40">
+				<col w="40"/>
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" font_weight="bold"  label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="12" align="center" label="Epreuve" font_weight="bold">$(Code_categorie)</text>
+			</body>
+	</report>
+
+<!-- ************************************************************** -->	
+<!--  Liste des dossards ET départ par Club  -->
+<!--  Version 6/2022 Stephane V. Ok -->
+
+	<report id="lst_par_club"  title="(params.title)" header="1" first_header="0" footer="1">
+		<lua> 
+			if params.saut==nil or params.saut=="" then saut='0' else saut=params.saut end 
+			if params.type_phase==nil or params.type_phase=="" then type_phase= "all" else type_phase =params.type_phase end  
+			if params.type_lst==nil or params.type_lst=="" then title="Liste des dossards par Club" type_lst='dossard' else title="Liste de départ par Club" type_lst=params.type_lst end 
+
+		</lua>
+	<!-- Gestion du saut de ligne si saut="1" -->
+		<lua>  page_break = tonumber((saut))	 	</lua>
+		<lua>course_phase = code_course..'_'..code_phase</lua>
+		<order key="Numero_club, Dossard" />
+		<rupture key="Numero_club">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<need h="3cm" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>club = body:GetCell('Club', row);</lua>
+				<lua>num_club = body:GetCell('Numero_club', row);</lua>
+				<text row="auto" col="1">$(Numero_club)..' - '..club..' ('..body:GetCounterValue('Numero_club',num_club)..')'</text>
+			</before>
+		</rupture>
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+			<text col="8" align="center" label="Dossard">$(Dossard)</text>
+			<text col="40" align="left" font_weight="bold" label="Bateau">$(Bateau)</text>
+			<text col="12" align="center" label="Epreuve">$(Code_categorie)</text>
+
+				<text cond="type_phase~='all' and type_lst=='depart'" col="7" align="center" font_weight="bold" label="Départ">body:GetCell('Heure_depart'..course_phase, row,'%2hh%2m:%2s')</text>
+
+				<lua>if type_phase=='all' and  type_lst=='depart' then</lua>
+					<lua>for p=1,nb_phase do</lua>
+						<text col="7" align="center" font_weight="bold" label="('H.Départ '..tostring(p))" >body:GetCell('Heure_depart'..tostring(code_course)..'_'..tostring(p), row, '%2hh%2m:%2s')</text> 
+					<lua>end</lua>
+				<lua>end</lua>
+		</body>
+	</report>
+
+
+<!--  ************************************************************************************************************************************** -->
+<!--  *****************  LISTE DE DEPART														******************************************** -->
+<!--  ************************************************************************************************************************************** -->
+
+<!-- ************************************************************** -->
+<!-- Tableau de Bord des Horaires -->
+<!--  Version 6/2022  Ok -->
+
+	<report id="horaire" title="Tableau de Bord des Horaires" header="1" first_header="0" footer="1">
+		<order key="Numero_club, Bateau" />
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="8" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+
+			<row h="auto"/>
+			<lua>if $(_Type_) == '2' then</lua>
+				<text col="15" align="left" font_weight="bold" font_size_step="4" label="Epreuve">$(Libelle_court)</text>
+				<text col="10" label="Date" align="center">$(Date_epreuve)</text>
+				<text col="5" label="Ordre" align="right">$(Ordre)</text>
+				<text col="5" label="Nbr" align="right">$(Nombre)</text>
+				<text col="10" label="H.Départ" align="center" font_weight="bold" font_size_step="2">$(Heure_depart)</text>
+				<text col="10" label="H.Fin" align="center" font_weight="bold" font_size_step="2">$(Heure_depart_fin)</text>
+				<text col="5" label="Phase" align="center">$(Code_phase)</text>
+			<lua>else</lua>
+				<text col="1" align="center" font_weight="bold">$(_Rupture_)</text>
+			<lua>end</lua>
+		</body>
+	</report>
+
+<!-- ************************************************************** -->
+<!--  Liste de départ -->
+<!--  Version 6/2022 Stephane V. Ok -->
+<!-- Variables : type_phase all affiche toutes les phases triées par dossard, sinon phase en cours trié par heure de dép. -->
+	<report id="lst_depart" title="('Liste de Départ - '..label_phase)"  header="1" first_header="0" footer="1">
+	<!-- Gestion du titre -->
+		<lua>if params.type_phase==nil or params.type_phase=="" then type_phase= "all" else type_phase =params.type_phase end  
+			if type_phase=='all' then	title='Liste de Départ' end
+		</lua>
+		<order cond="type_phase~='all'" key="('Heure_depart'..code_course..'_'..code_phase..', Dossard')"/>
+		<order cond="type_phase=='all'" key="('Dossard')"/>
+		
+		<rupture key="Code_categorie">
+			<before>
+				<pagebreak cond="page_break == 1 and row ~= 0" />
+				<need h="3cm" />
+				<font size="12"/>
+				<row value="0.3cm" />
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+		
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<lua>course_phase = code_course..'_'..code_phase</lua>
+			<lua>nb_equipiers = GetNbEquipiers($(Code_bateau))</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 end</lua>
+			
+				<row h="auto"/>
+				<text col="4" align="center" label="Dos">$(Dossard)</text>
+				<matrix col="20">
+					<col w="20"/>
+					<lua>for e=1,nb_equipiers do</lua>
+						<row h="auto"/>
+						<text col_start="1" font_weight="bold" align="left" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+					<lua>end</lua>
+				</matrix>
+				<text col="24" align="left" label="Club">$(Numero_club)..' - '..$(Club)</text>
+
+				<text cond="type_phase~='all'" col="7" align="center" font_weight="bold" label="Départ">body:GetCell('Heure_depart'..course_phase, row,'%2hh%2m:%2s')</text>
+
+				<lua>if type_phase=='all'then</lua>
+					<lua>for p=1,nb_phase do</lua>
+						<text col="7" align="center" font_weight="bold" label="('H.Départ '..tostring(p))" >body:GetCell('Heure_depart'..tostring(code_course)..'_'..tostring(p), row, '%2hh%2m:%2s')</text> 
+					<lua>end</lua>
+				<lua>end</lua>			
+		</body>
+	</report>
+
+<!-- ************************************************************** -->
+<!--  Liste de départ : DOUBLAGE Chrono -->
+<!--  Version 6/2022 Stephane V. Ok -->
+	<report id="lst_depart_doublage" title="(params.title)"  header="1" first_header="0" footer="1">	
+		<lua> 
+			if params.ordre==nil or params.ordre=="" then ordre='Dossard' else ordre ='Heure'  end 
+		</lua>
+
+	<!-- Gestion du titre -->
+		<lua>if params.titre==nil or params.titre=="" then titre= params.title else titre =params.titre end  </lua>
+		<lua>if ordre=='Dossard' then title=titre
+			 else title=titre..' - '..label_phase
+			 end</lua>
+
+		<order cond="ordre=='Dossard'" key="Dossard" />
+		<order cond="ordre=='Heure'" key="('Heure_depart'..code_course..'_'..code_phase..', Dossard')"/>
+		
+		<rupture key="Code_categorie">
+			<before>
+				<need h="3cm" />
+				<font size="12"/>
+				<row h="0.3cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+			</before>
+		</rupture>
+	
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="9" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="60px"/>
+			<text col="4" align="center" font_weight="bold" label="Dos.">$(Dossard)</text>
+			<text col="30" align="left" font_weight="bold" label="Code">$(Bateau)</text>
+			<text col="8" align="center" label="Epreuve">$(Code_categorie)</text>
+			<lua>if ordre=='Dossard' then </lua>
+				<lua>for p=1,nb_phase do</lua>
+					<text col="15" align="right" label="('Doublage '..tostring(p))"></text> 
+				<lua>end</lua>
+				<lua>else</lua>
+					<text col="15" align="right" label="('Doublage')"></text> 
+			<lua>end</lua>
+		</body>
+	</report>	
+	
+
+<!--  ************************************************************************************************************************************** -->
+<!--  *****************  RESULTATS 																******************************************** -->
+<!--  ************************************************************************************************************************************** -->
+
+<!-- ************************************************************** -->
+<!-- Résultat d'une Phase avec la prise en charge F A/B et le classement catégories  -->
+<!--  Version 6/2022 Stephane V.  -->
+
+	<report id="res_phase" title="(params.title)">
+		<!-- PARAMETRES :																				|	FORMATS COURSES
+			 																							|		A: Q F 
+				type_clt_categorie => Age pour M/C/J/S... , Age_regroupe pour U15/U18. 					|		B: Q1 Q2 meilleure des 2
+				clt_par_categorie => si non null résultats triés par catégories							|		C: Q1 Q2 1/2F F
+				detail_penalite => si non null affiche le détail des penalités							|		D: 1 Manche seule
+				podium =>  si non null mode podium														|		E: Q1 F A/B fusionnée
+				aff_officiels => Affiche les officiels pour les podiums									|		F: 3 manches 
+				type_phase => all affiche le temps de toutes les phases pour Q FAB et Q A B				|		G: Q1 FB FA																										 
+				-->
+	<lua>
+			TypeA='A'			
+			TypeC='C'			
+			TypeE='E'		
+			TypeG='G'	
+			
+			if params.type_clt_categorie==nil then type_clt_categorie='' else type_clt_categorie = params.type_clt_categorie end  
+			if params.clt_par_categorie==nil or params.clt_par_categorie=="" then clt_par_categorie='' else clt_par_categorie =1 end  
+			if params.detail_penalite==nil or params.detail_penalite=="" then detail_penalite='' else detail_penalite = 1 end 
+			if params.aff_officiels==nil then aff_officiels='' else aff_officiels=1 end 			
+			if params.podium==nil then podium='' else podium =1 end 
+			if params.type_phase==nil or params.type_phase=="" then type_phase= '' else type_phase = 'all' end  
+
+			txtCoursePhase = tostring(code_course)..'_'..tostring(code_phase)
+			txtCourse = tostring(code_course)
+			Code_type_course = $(Competition_Course.Code_type_course)			
+			CltcFA_max=0
+			txtCoursePhaseFB=""
+			txtCoursePhaseFA=""
+		</lua>
+
+	<!-- Gestion du titre et progressions -->
+		<lua>if params.titre==nil or params.titre=="" then titre= params.title else titre =params.titre end  
+			 if podium==1 then title = titre 
+			 elseif type_phase=='' or (Code_type_course~=TypeE and  Code_type_course~=TypeG) then title=titre..' '..label_phase
+			 else title = titre  end
+		
+			body:AddColumn({ name = 'Finale', type = sqlType.TEXT });
+			for j=0,body:GetNbRows()-1 do
+				if Code_type_course == "E" and code_phase==1 then	
+					bateau= body:GetCell('Code_bateau',j)
+					body:SetCell('Finale',j, GetResultatCourse(code_course, 2,bateau, 'Groupe'))							
+
+				elseif Code_type_course == "C" or Code_type_course == "G" or Code_type_course == "A" then
+						if body:GetCell('Progression_cible'..txtCoursePhase,j) == "FB" then
+							body:SetCell('Finale',j, 'B');
+							txtCoursePhaseFB= body:GetCell('Code_phase_cible'..txtCoursePhase,j)
+						elseif body:GetCell('Progression_cible'..txtCoursePhase,j) == "FA"  then
+								body:SetCell('Finale',j, 'A');
+								txtCoursePhaseFA= body:GetCell('Code_phase_cible'..txtCoursePhase,j)
+						elseif body:GetCell('Progression_cible'..txtCoursePhase,j) == "F" or body:GetCell('Progression_cible'..txtCoursePhase,j) == "DF"  then
+								body:SetCell('Finale',j, body:GetCell('Progression_cible'..txtCoursePhase,j));			
+						end
+				end
+			end
+		</lua>
+	<!-- Cas particulier de la F A/B fusionnée -->
+		<lua> 
+			FinaleAB_fusionnee=0
+			rupture_AB=""
+			if Code_type_course == "E" and code_phase==2 then
+					FinaleAB_fusionnee=1
+					if podium =='' then rupture_AB="Code_categorie, Groupe"..txtCourse.."_2" end
+			end 
+		</lua>
+	<!-- Calcul de l'age => recupere les colonnes Age pour M/C/J/S... , Age_long pour Cadet... , Age_regroupe pour U15/U18...  -->
+		<lua>dofile('./edition/categories.lua')
+			 Calcul_Categorie(body, $(Competition.Date_debut,'%4Y')   ,0)</lua>
+
+	<!-- Calcul du Classement par age  -->
+		<lua>body:AddColumn({ name = 'Clt_categorie', type = sqlType.RANKING })
+			 body:SetRanking('Clt_categorie', 'Code_categorie,  Tps'..txtCoursePhase , 'Code_categorie,'..type_clt_categorie)</lua>
+		
+
+	<!-- Calcul du Classement pour FA/B fusionnées  -->
+		<lua>body:AddColumn({ name = 'Clt_final', type = sqlType.RANKING })
+				if type_phase=='all' then 	body:SetRanking('Clt_final', 'Code_categorie, Groupe'..txtCourse..'_2, Tps'..txtCourse..'_2', 'Code_categorie')
+				elseif podium =='' then 	body:SetRanking('Clt_final', 'Code_categorie, Groupe'..txtCourse..'_2, Tps'..txtCourse..'_2, Tps'..txtCourse..'_1', 'Code_categorie, Groupe'..txtCourse..'_2')
+			 	else 						body:SetRanking('Clt_final', 'Code_categorie, Groupe'..txtCourse..'_2, Tps'..txtCourse..'_2, Tps'..txtCourse..'_1', 'Code_categorie') end </lua>
+
+	<!-- Calcul du Classement par age pour FA/B fusionnées -->
+		<lua>body:AddColumn({ name = 'Clt_final_categorie', type = sqlType.RANKING })
+			 	if podium =='' then 	body:SetRanking('Clt_final_categorie', 'Code_categorie, Groupe'..txtCourse..'_2, Tps'..txtCoursePhase,  'Code_categorie, '..type_clt_categorie..',Groupe'..txtCourse..'_2')
+			 	else 					body:SetRanking('Clt_final_categorie', 'Code_categorie, Groupe'..txtCourse..'_2, Tps'..txtCoursePhase,  'Code_categorie, '..type_clt_categorie) end</lua>
+
+	<!-- Calcul du Classement Masters -->
+		<lua>body:AddColumn({ name = 'Clt_masters', type = sqlType.RANKING })
+			 body:SetRanking('Clt_masters','Code_categorie,  Tps'..txtCourse..'_4 asc NULL_OK, Tps'..txtCourse..'_3 asc NULL_OK, Tps'..txtCourse..'_2 asc NULL_OK ','Code_categorie,'..type_clt_categorie) </lua>	
+
+
+<!-- tri en fonction des situations FinaleAB fusionnées, classement par catégorie (clt_par_categorie), affichage toutes les phases (type_phase), podium -->			
+		<order cond="clt_par_categorie==1  and FinaleAB_fusionnee==0"      	key="('Code_categorie, '..type_clt_categorie..'_ordre, Tps'..txtCoursePhase..', Dossard')" />
+		<order cond="clt_par_categorie=='' and FinaleAB_fusionnee==0"  		key="('Code_categorie, Tps'..txtCoursePhase..', Dossard')" />
+	
+	<!--course type E et G pour resultats complets-->
+		<order cond="clt_par_categorie=='' and Code_type_course==TypeE and type_phase=='all'" key="('Code_categorie, Finale, Groupe'..txtCourse..'_2, Tps'..txtCourse..'_2, Tps'..txtCourse..'_1, Dossard')" />
+		<order cond="clt_par_categorie=='' and Code_type_course==TypeG and type_phase=='all'" key="('Code_categorie, Finale, Tps'..txtCourse..'_'..txtCoursePhaseFA..', Tps'..txtCourse..'_'..txtCoursePhaseFB..', Tps'..txtCourse..'_1, Dossard')" />
+
+<!--Code_type_course  txtCoursePhaseFB -->
+
+	<!--course type E-->
+		<order cond="clt_par_categorie=='' and FinaleAB_fusionnee==1 and type_phase~='all'" key="('Code_categorie, Groupe'..txtCourse..'_2,  Tps'..txtCourse..'_2, Tps'..txtCourse..'_1, Dossard')" />
+		<order cond="clt_par_categorie==1  and FinaleAB_fusionnee==1"      					key="('Code_categorie, Groupe'..txtCourse..'_2, '..type_clt_categorie..'_ordre , Tps'..txtCourse..'_2, Tps'..txtCourse..'_1, Dossard')" />
+		<order cond="clt_par_categorie==1  and FinaleAB_fusionnee==1 and podium==1" 		key="('Code_categorie, '..type_clt_categorie..'_ordre , Groupe'..txtCourse..'_2,  Tps'..txtCourse..'_2, Tps'..txtCourse..'_1, Dossard')" />
+		
+<!-- MASTERS classement general-->
+		<order cond="type_clt_categorie=='Masters' and podium==1"      	key="('Code_categorie, '..type_clt_categorie..'_ordre ,  Tps'..txtCourse..'_4 asc NULL_OK, Tps'..txtCourse..'_3 asc NULL_OK, Tps'..txtCourse..'_2 asc NULL_OK')" />
+		<rupture key="Code_categorie">
+			<before>
+				<need cond="podium==''" h="3cm" />
+				<need cond='podium==1' h="9cm" />
+				<font size="14"/>
+				<row h="0.4cm"/>
+				<lua>epreuve = $(Code_categorie)
+					etat=GetEtatEpreuve(code_course, code_phase, epreuve)
+					Officiel_txt=""
+					if etat==5 then Officiel_txt='Officiel' 
+					elseif etat==4 then Officiel_txt='Officieux' 
+					end
+					mode_finale=0 </lua> <!-- Pour savoir si on affiche la colonne F A/B --><lua> 
+					premier_cat=1 
+					premier_finale=1
+					titre_finale=0</lua>
+				<row h="auto"/>
+				<text  col="auto" >GetEpreuveLabel(epreuve)..' ('..epreuve..') '</text>
+				<text  cond="podium==''" col="1" align="right" font_weight="bold" >Officiel_txt</text>
+			</before>
+			<after>
+			<lua>if podium==1 and clt_par_categorie=='' and aff_officiels==1 then</lua>
+				<font size="14"/>
+				<row h="0.2cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" align="center">'OFFICIELS'</text>
+				<text row="auto"  >'FFCK : '</text>
+				<row h="0.2cm"/>
+				<text row="auto"  >'ELUS : '</text>
+				<text row="auto" align="left" >'________________________________________________________________________'</text>
+			<lua>end</lua>
+			</after>			
+		</rupture>
+		<lua> 
+			rupture_cat=""
+			if clt_par_categorie==1 then rupture_cat="Code_categorie, "..type_clt_categorie end
+		</lua>
+		<rupture key="(rupture_cat)" >
+			<before>
+			<lua>if clt_par_categorie==1 then </lua>
+					<need cond="podium==''" h="3cm" />
+					<need cond='podium==1' h="8cm" />
+					<font size="12"/>
+					<row cond="(premier_cat~=1)" h="0.2cm"/>
+					<text cond="type_clt_categorie=='Age_regroupe'" row="auto" col="1" >epreuve ..' - '..$(Age_regroupe)</text>
+					<text cond="type_clt_categorie=='Age'" row="auto" col="1" >epreuve ..' - '..$(Age_long)</text>		
+					<text cond="type_clt_categorie=='Masters'" row="auto" col="1" >epreuve ..' - '..$(Masters)</text>		
+				<lua>premier_cat=0 
+					 premier_finale=1
+				end</lua>
+			</before>
+			<after>
+			<lua>if podium==1 and clt_par_categorie==1 and aff_officiels==1 then</lua>
+				<font size="14"/>
+				<row h="0.2cm"/>
+				<lua>epreuve = $(Code_categorie)</lua>
+				<text row="auto" align="center">'OFFICIELS'</text>
+				<text row="auto"  >'FFCK : '</text>
+				<row h="0.2cm"/>
+				<text row="auto"  >'ELUS : '</text>
+				<text row="auto" align="left" >'________________________________________________________________________'</text>
+			<lua>end</lua>
+			</after>
+		</rupture>
+
+		<rupture key="(rupture_AB)" >
+			<before>
+				<lua> if FinaleAB_fusionnee==1 and podium=='' then
+				</lua>
+					<lua>groupe = body:GetCell('Groupe'..txtCourse..'_2', row)</lua>
+					<need h="3cm" />
+					<font size="14"/>
+					<row cond="(premier_finale~=1)" h="0.4cm"/>
+					<text row="auto" col="1" cond="groupe == 'A' or groupe == 'B' ">'Finale '..groupe</text>
+					<text row="auto" col="1" cond="groupe:len() == 0">'Finale'</text>
+				<lua> premier_finale=0 
+					  
+					end</lua>
+			</before>
+		</rupture>
+
+	<!-- BODY 		-->
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font size="8" adjust="ellipsize"/>
+			<padding all="0px" />
+			<spacing horz="12" vert="5" />
+			<row h="auto"/>
+		<!-- Affichage du groupe de la Finale  
+app.GetAuiMessage():AddLineError(GetEquipier($(Code_bateau),1,'Nom')..' '..$(Finale)..' '..mode_finale..' '..titre_finale..' '..Qualifie )		
+		-->				
+			<lua>	
+					mode_finale=0
+					
+					Qualifie=""
+					if $(Finale) == 'A' then 
+						mode_finale=1;
+						titre_finale=1;
+					elseif  $(Finale) == 'B' then 
+						titre_finale=1;
+					elseif  $(Finale) == 'DF' or $(Finale) == 'F' then 
+						mode_finale=1;
+						titre_finale=2;
+						Qualifie="Q"
+					end 
+
+			</lua>
+
+			<lua> if  mode_finale==1 and podium=='' then </lua>
+				<font color="red"/>
+			<lua>else</lua>
+				<font size="8"/>
+			<lua>end</lua>	
+	<!-- Gestion si PODIUM 		-->
+			<lua>
+				if FinaleAB_fusionnee==1 and clt_par_categorie=="" then place=$(Clt_final)
+				elseif type_clt_categorie=='Masters' and podium~='' then place=$(Clt_masters) 
+				elseif FinaleAB_fusionnee==0 and clt_par_categorie=="" then place=body:GetCell('Cltc'..txtCoursePhase, row)
+				elseif clt_par_categorie==1 then place=$(Clt_final_categorie)
+				end
+				if  tonumber(place)==1 or tonumber(place)==2 or tonumber(place)==3 or podium==''  then	</lua> 	
+
+
+	<!-- Colonne Classement ...-->
+				<text col="4" cond="type_phase=='' or (Code_type_course~=TypeE and  Code_type_course~=TypeG)" align="center" font_weight="bold" font_size_step="1" label="Clt">place</text>
+
+				<lua>if body:GetCell('Cltc'..txtCourse..'_'..txtCoursePhaseFA, row)~='' then CltcFA_max=body:GetCell('Cltc'..txtCourse..'_'..txtCoursePhaseFA, row) end</lua>
+				<text col="4" cond="$(Finale) == 'A' and type_phase=='all' and Code_type_course==TypeG" align="center" font_weight="bold" font_size_step="1" label="Clt">body:GetCell('Cltc'..txtCourse..'_'..txtCoursePhaseFA, row)</text>
+				<text col="4" cond="$(Finale) == 'B' and type_phase=='all' and Code_type_course==TypeG" align="center" font_weight="bold" font_size_step="1" label="Clt">CltcFA_max+body:GetCell('Cltc'..txtCourse..'_'..txtCoursePhaseFB, row)</text>
+				<text col="4" cond="type_phase=='all' and Code_type_course==TypeE" align="center" font_weight="bold" font_size_step="1" label="Clt">$(Clt_final)</text>
+				
+	<!-- Affichage du classement et du classement des catégories -->	
+			<lua>if ((type_clt_categorie=='Age') or (type_clt_categorie=='Age_regroupe')  or (type_clt_categorie=='Masters')) and clt_par_categorie~=1  then </lua>			
+				<text cond="FinaleAB_fusionnee==1 and type_clt_categorie=='Age_regroupe'" col="6" align="right" label="Clt/Cat">$(Clt_final_categorie)..'/'..$(Age_regroupe)</text>
+				<text cond="FinaleAB_fusionnee==1 and type_clt_categorie=='Age'" col="6" align="right" label="Clt/Cat">$(Clt_final_categorie)..'/'..$(Age)</text>
+				<text cond="FinaleAB_fusionnee~=1 and type_clt_categorie=='Age_regroupe'" col="6" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Age_regroupe)</text>
+				<text cond="FinaleAB_fusionnee~=1 and type_clt_categorie=='Age'" col="6" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Age)</text>
+				<text cond="type_clt_categorie=='Masters'" col="8" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Masters)</text>
+			<lua>end</lua>
+
+			<text col="4" align="center" font_style="italic"  label="Dos.">$(Dossard)</text>
+			<lua>
+				if group == 'label' then
+					nb_equipiers = 1;
+				else
+					nb_equipiers = GetNbEquipiers($(Code_bateau));
+				end
+			</lua>
+			<matrix col="40">
+				<col w="24" />
+				<lua>for e=1,nb_equipiers do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" font_weight="bold" font_size_step="2" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+				<lua>end</lua>
+			</matrix>
+			<text col="25" align="left" label="Club">$(Club)</text>
+			
+		<!-- Temps Inter -->
+			<lua>for inter=1,nb_inter do</lua>
+				<text col="6" align="right" label="('Inter'..inter)">body:GetCell('Tps'..txtCoursePhase..'_inter'..inter, row)</text>
+				<text col="4" align="right" label="">body:GetCell('Cltc'..txtCoursePhase..'_inter'..inter, row)</text> 
+			<lua>end</lua>
+
+		<!-- Cas affiche que la phase -->
+		<lua> if type_phase=='' or (Code_type_course~=TypeE and  Code_type_course~=TypeG) then</lua>			
+			<text cond="not (type_clt_categorie=='Masters' and podium~='')" col="7" align="right" label="Chrono">body:GetCell('Tps_chrono'..txtCoursePhase, row)</text> 
+		<!-- Détail des pénalités -->
+			<lua>if detail_penalite==1 then</lua>
+				<lua>penalite = body:GetCell('Penalite'..txtCoursePhase, row)</lua>
+				<lua> if string.len(penalite)~=nb_porte[code_phase] and string.len(penalite)~=0	then nb_pena=nb_equipiers else nb_pena=1 
+					  end </lua>
+				<matrix col="(nb_porte[code_phase])">
+					<col w="1" count="(nb_porte[code_phase])"/>
+					<lua>for e=1,nb_pena do</lua>
+						<row h="auto"/>
+						<text col_start="1" col_end="0" label="(tostring(nb_porte[code_phase]).. ' Portes')" />
+						<lua>for i=1 + (e-1)*nb_porte[code_phase] ,nb_porte[code_phase] +(e-1)*nb_porte[code_phase] do</lua>
+							<lua>porte = string.sub(penalite,i,i) or ''</lua>
+							<text col_start="(i-(e-1)*nb_porte[code_phase])" bk_color="green" cond="porte=='0' and group == 'body' " /> 
+							<text col_start="(i-(e-1)*nb_porte[code_phase])" bk_color="yellow" cond="porte=='2' and group == 'body' " /> 
+							<text col_start="(i-(e-1)*nb_porte[code_phase])" bk_color="red" cond="porte=='5' and group == 'body' "/>
+						<lua>end</lua>
+					<lua>end</lua>
+				</matrix>
+			<lua>end</lua>
+			<text cond="not (type_clt_categorie=='Masters' and podium~='')" col="6" align="center" label="Pénalité">GetTotalPenalite(code_course, code_phase, row)</text> 
+			<text cond="not (type_clt_categorie=='Masters' and podium~='')" col="7" align="right" label="Temps" font_weight="bold" font_size_step="1">body:GetCell('Tps'..txtCoursePhase, row, '[P10]%xs,%2f')</text> 
+		<!-- Cas affiche toutes les phases -->
+		<lua> else</lua> 
+			<lua> if Code_type_course==TypeE then</lua>  
+				<text col="4" align="right" label="Clt.Q" font_size_step="-1">body:GetCell('Cltc'..txtCourse..'_1',row)</text> 
+				<text col="7" align="right" label="Chrono Q" font_size_step="-1">body:GetCell('Tps_chrono'..txtCourse..'_1',row,'[P10]%xs,%2f') </text> 
+				<text col="5" align="center" label="Pena.Q" font_size_step="-2">GetTotalPenalite(txtCourse, 1, row)</text> 
+				<text col="7" align="right" label="Tps Q" font_weight="bold" >body:GetCell('Tps'..txtCourse..'_1',row,'[P10]%xs,%2f')</text> 
+				<text col="7" align="right" label="Chrono F" font_size_step="-1">body:GetCell('Tps_chrono'..txtCourse..'_2',row,'[P10]%xs,%2f') </text> 
+				<text col="5" align="center" label="Pena.F" font_size_step="-2">GetTotalPenalite(txtCourse, 2, row)</text> 
+				<text col="7" align="right" label="Tps F" font_weight="bold" >body:GetCell('Tps'..txtCourse..'_2',row,'[P10]%xs,%2f')</text> 
+
+			<lua> elseif Code_type_course==TypeG then</lua>					
+				<text col="4" align="right" label="Clt.Q" font_size_step="-1">body:GetCell('Cltc'..txtCourse..'_1',row)</text> 
+				<text col="7" align="right" label="Chrono Q" font_size_step="-1">body:GetCell('Tps_chrono'..txtCourse..'_1',row,'[P10]%xs,%2f') </text> 
+				<text col="5" align="center" label="Pena.Q" font_size_step="-2">GetTotalPenalite(txtCourse, 1, row)</text> 
+				<text col="7" align="right" label="Tps Q" font_weight="bold" >body:GetCell('Tps'..txtCourse..'_1',row,'[P10]%xs,%2f')</text> 
+				<lua>if $(Finale) == 'A' then</lua>
+					<text col="7" align="right" label="Chrono F" font_size_step="-1">body:GetCell('Tps_chrono'..txtCourse..'_'..txtCoursePhaseFA,row,'[P10]%xs,%2f') </text> 
+					<text col="5" align="center" label="Pena.F" font_size_step="-2">GetTotalPenalite(txtCourse, txtCoursePhaseFA, row)</text> 
+					<text col="7" align="right" label="Tps F" font_weight="bold" >body:GetCell('Tps'..txtCourse..'_'..txtCoursePhaseFA,row,'[P10]%xs,%2f')</text> 
+				<lua>else</lua>
+					<text col="7" align="right" label="Chrono F" font_size_step="-1">body:GetCell('Tps_chrono'..txtCourse..'_'..txtCoursePhaseFB,row,'[P10]%xs,%2f') </text> 
+					<text col="5" align="center" label="Pena.F" font_size_step="-2">GetTotalPenalite(txtCourse, txtCoursePhaseFB, row)</text> 
+					<text col="7" align="right" label="Tps F" font_weight="bold" >body:GetCell('Tps'..txtCourse..'_'..txtCoursePhaseFB,row,'[P10]%xs,%2f')</text> 
+				<lua>end</lua>
+			<lua> end</lua>			
+		<lua> end</lua>			
+	
+		<!-- Colonne Ecart...-->
+				<text cond="not (type_clt_categorie=='Masters' and podium~='')" col="7" align="right" label="Ecart" font_style="italic">body:GetCell('Diffc'..txtCoursePhase, row)</text>
+		<!-- Colonne selection en 1/2 F Finale ...-->
+				<text col="4" cond="titre_finale==1 and podium==''" align="center" font_weight="bold" label="FA/B">$(Finale)</text> 	
+				<text col="4" cond="titre_finale==2 and podium==''" align="center" font_weight="bold" label="">Qualifie</text> 		
+	<lua>end</lua>
+		</body>
+	</report>
+
+<!-- ************************************************************** -->
+<!-- Résultats Meilleur/Somme Temps des x Phases  -->
+<!--  Version 6/2022 Stephane V. Ok -->
+
+	<report id="res_best_sum_phase" >
+		<lua> 
+			TypeA='A'		
+			TypeC='C'	
+			TypeE='E'	
+			TypeG='G'		
+
+			if params.type_clt_categorie==nil then type_clt_categorie='' else type_clt_categorie = params.type_clt_categorie end
+			if params.type_res==nil then type_res='' else type_res = params.type_res end
+			if type_res=='TotalTime' then title="Résultats : Somme de toutes les phases - Officiels" else title="Résultats : Meilleur Temps de toutes les phases - Officiels" end
+			type_course=$(Competition_Course.Code_type_course)
+ 		</lua>
+	<!-- Calcul de l'age => recupere les colonnes Age pour M/C/J/S... , Age_long pour Cadet... , Age_regroupe pour U15/U18...  -->
+		<lua>dofile('./edition/categories.lua')</lua>
+		<lua>Calcul_Categorie(body, $(Competition.Date_debut,'%4Y')   ,0)</lua>
+
+		<!-- Création de 2 Colonnes : pour le Meilleur/Somme Temps et Classement Meilleur Temps  -->
+		<lua>body:AddColumn({ name = 'Tps_best_sum', type = sqlType.CHRONO })</lua>
+		<lua>body:AddColumn({ name = 'Clt_best_sum', type = sqlType.RANKING })</lua>
+		<!-- Calcul Meilleur/Somme Temps  -->
+		<lua>lstTps = {}; for p=1,nb_phase do table.insert(lstTps, 'Tps'..tostring(code_course)..'_'..tostring(p)) end</lua>
+		<lua>if type_res=='TotalTime' then body:ComputeTotalTime('Tps_best_sum', lstTps) else body:ComputeBestTime('Tps_best_sum', lstTps) end</lua>
+		<!-- Calcul du Classement sur le Meilleur/somme Temps  -->
+		<lua>body:SetRanking('Clt_best_sum', 'Code_categorie, Tps_best_sum', 'Code_categorie')</lua>
+
+	<!-- Calcul du Classement par age  -->
+		<lua>body:AddColumn({ name = 'Clt_categorie', type = sqlType.RANKING })</lua>
+		<lua>body:SetRanking('Clt_categorie', 'Code_categorie,  Clt_best_sum' , 'Code_categorie,'..type_clt_categorie)</lua>
+
+		<order key="Code_categorie, Tps_best_sum, Dossard" />
+
+		<rupture key="Code_categorie">
+			<before>
+				<need h="3cm" />
+				<font size="14"/>
+				<row h="0.4cm"/>
+				<lua>if type_course~=TypeA and type_course~=TypeC and type_course~=TypeE and type_course~=TypeG then</lua>
+					<lua>epreuve = $(Code_categorie)</lua>
+					<text row="auto" col="1" >GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+				<lua>else</lua>
+					<text row="auto"  align="center"  col="1" >'Format de course non compatible avec ce type de liste'</text>
+				<lua>end</lua>
+			</before>
+		</rupture>
+		
+		<body>
+			<lua>if type_course~=TypeA and type_course~=TypeC and type_course~=TypeE and type_course~=TypeG then</lua>
+				<call option="couleur_alternee" file="./edition/options.xml"/>
+				<font size="8" adjust="ellipsize"/>
+				<padding all="0px" />
+				<spacing horz="12" vert="5" />
+				
+				<row h="auto"/>
+				
+				<text col="4" align="center" font_weight="bold" font_size_step="1" label="Clt">$(Clt_best_sum)</text>
+
+			<!-- Affichage du classement et du classement des catégories -->	
+				<lua>if ((type_clt_categorie=='Age') or (type_clt_categorie=='Age_regroupe'))  then </lua>			
+					<text cond="type_clt_categorie=='Age_regroupe'" col="8" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Age_regroupe)</text>
+					<text cond="type_clt_categorie=='Age'" col="8" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Age)</text>
+				<lua>end</lua>
+
+				<text col="4" align="center" font_style="italic"  label="D.">$(Dossard)</text>
+
+				<lua>
+					if group == 'label' then
+						nb_equipiers = 1;
+					else
+						nb_equipiers = GetNbEquipiers($(Code_bateau));
+					end
+				</lua>			
+				<matrix col="40">
+					<col w="24" />
+					<lua>for e=1,nb_equipiers do</lua>
+						<row h="auto"/>
+						<text col_start="1" align="left" font_weight="bold" font_size_step="2" label="Nom - Prénom">GetEquipier($(Code_bateau),e,'Nom')..' '..GetEquipier($(Code_bateau),e,'Prenom')</text> 
+					<lua>end</lua>
+				</matrix>
+						<text col="24" align="center" label="Club">$(Club)</text>
+				
+				<lua>for p=1,nb_phase do</lua>
+					<lua>txtCoursePhase = tostring(code_course)..'_'..tostring(p)</lua>
+					<text col="7" align="right" label="('Chrono.'..tostring(p))" font_size_step="-1">body:GetCell('Tps_chrono'..txtCoursePhase, row)</text> 
+					<text col="7" align="center" label="('Péna.'..tostring(p))" font_size_step="-2">GetTotalPenalite(code_course, p, row)</text> 
+					<text col="7" align="right" label="('Tps.'..tostring(p))" font_weight="bold" >body:GetCell('Tps'..txtCoursePhase, row, '[P10]%xs,%2f')</text> 
+				<lua>end</lua>
+				<text cond="type_res=='TotalTime'" col="8" align="right" label="Som.Tps" font_weight="bold" font_size_step="1">$(Tps_best_sum, '[P10]%xs,%2f')</text> 
+				<text cond="type_res==''" col="8" align="right" label="Meil.Tps" font_weight="bold" font_size_step="1">$(Tps_best_sum, '[P10]%xs,%2f')</text> 
+			<lua>end</lua>
+		</body>
+		
+	</report>
+
+</edition>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Editions des Classements FFCK !-->
+
+<edition>
+	<menu>
+		<menu title="Descente" image="./res/32x32_juges.png">
+			<menu title="Classement Simple" image="./res/16x16_list.png" action="classement" id="clt_std" /> 
+			<menu title="Classement Détaillé" image="./res/16x16_list.png" action="classement" id="clt_std" detail="1"/>
+			<menu title="Export PCE" image="./res/16x16_export.png" action="classement" target="pce" />
+		</menu>
+	</menu>
+
+	<!-- header standard !-->
+	<header>
+		<spacing all="0"/>
+		<background mode="transparent"/>
+		<font name="Calibri" size="12" adjust="max" weight="bold"/>
+		<col w="1"/>
+		<text row="auto" align="center" font_size_step="4">'Classement FFCK'</text>
+		<text row="auto" align="center">params.title..' - Type Classement : '..params.type_classement.." n°"..params.liste</text>
+		<row h="0.8cm"/>
+	</header>
+	
+	<!-- footer standard !-->
+	<footer>
+		<background mode="transparent"/>
+		<font name="Calibri" size="8" adjust="best" weight="normal"/>
+		<pen border="none" />
+
+		<row value="auto" />
+		<text align="right">params.title..' - Type Classement : '..params.type_classement.." n°"..params.liste</text>
+			
+		<line col_start="1" col_end="0" pen_size="2" pen_color="dkgray" border="bottom"/>
+		
+		<row value="auto" />
+		<matrix col_start="1">
+			<row value="auto"/>
+			<text col="auto" align="left">app.GetName()..' Version '..app.GetVersion()..'   / '</text>
+			<text col="auto" align="left">os.date('Edité le %d-%m-%Y à %H:%M:%S ')</text>
+			<image col="0.8cm" adjust="width" align="left">'./res/32x32_ffck.png'</image>
+			<image col="0.6cm" adjust="width" align="left">'./res/32x32_agil.png'</image>
+		</matrix>	
+		<text align="right">string.format('Page %d/%s',editor:GetPageCurrent(), editor:GetPageCountLabel())</text>
+		<line col_start="1" col_end="0" border="top" />
+	</footer>
+	
+	<report id="clt_std" title="Classement FFCK"  header="1" first_header="0" footer="1">
+		<order key="Code_epreuve, Clt Asc, Nb_perf Desc, Point Asc"/>
+		
+		<lua>
+			activite = params.activite;
+			type_classement = params.type_classement;
+			liste = params.liste;
+			tCompetition = base:GetTable('Competition');
+			tListe_Bateaux = base:GetTable('Liste_Bateaux');
+			tListe_Coureur = base:GetTable('Liste_Coureur');
+			tClt_Bateau_Performance = base:GetTable('Clt_Bateau_Performance');
+			
+			detail = tonumber(params.detail) or 0; 
+			
+			function GetLabelEpreuveClassement(epreuve)
+				local cmd;
+				cmd = 		"Select Libelle From Categorie_Age_Details ";
+				cmd = cmd.."Where Code = '"..epreuve.."' ";
+				cmd = cmd.."And Code_categorie = '"..string.sub(activite,1,1).."_"..string.sub(epreuve,1,3).."'";
+				return base:SelectString(cmd);
+			end
+			
+		</lua>
+
+		<lua>
+			function GetInfoCompetition(code_competition)
+				local info = 'N°'..tostring(code_competition);
+				
+				base:TableLoad(tCompetition, 'Select * From Competition Where Code = '..tostring(code_competition));
+				info = info..' '..tCompetition:GetCell('Nom',0);
+						
+				return info;
+			end
+		</lua>
+		
+		<rupture key="Code_epreuve">
+			<before>
+				<font size="12"/>
+				<row value="0.3cm" />
+				<text row="auto" col="1" >$(Code_epreuve)..' : '..GetLabelEpreuveClassement($(Code_epreuve))</text>
+			</before>
+		</rupture>
+		
+		<body>
+			<call option="couleur_alternee" file="./edition/options.xml"/>
+			<font name="Calibri" size="9" adjust="best" weight="normal"/>
+			<padding all="0px" />
+
+			<lua>LoadBateau($(Code_bateau), activite)</lua>
+			<lua>if group == 'label' then nb_equipiers = 1 else	nb_equipiers = LoadBateauCoureur($(Code_bateau), activite) end</lua>
+
+			<row h="auto"/>
+			<col w="6"/>
+			<matrix col="30">
+				<col w="30" />
+				<lua>for equipier=0, nb_equipiers-1 do</lua>
+					<row h="auto"/>
+					<text col_start="1" align="left" border="0" font_weight="bold" >tListe_Coureur:GetCell('Nom', equipier)..' '..tListe_Coureur:GetCell('Prenom', equipier)</text>
+				<lua>end</lua>
+				<text border="1" col_start="1" col_end="0" row_start="1" row_end="0" label="Nom - Prénom" font_weight="bold"><background mode="transparent" /></text>
+			</matrix>
+			<text col="30" align="left" label="Club">tListe_Bateaux:GetCell('Numero_club', 0)..' - '..tListe_Bateaux:GetCell('Club', 0)</text>
+			<text col="8" align="right" label="Point" font_weight="bold">$(Point)</text>
+			<text col="6" align="right" label="Nb.Perf">$(Nb_perf)</text>
+			
+			<lua>if detail == 1 and group == 'body' then </lua>
+				<lua>LoadCltBateauPerformance($(Code_bateau), type_classement, liste)</lua>
+				<lua>for perf=0, tClt_Bateau_Performance:GetNbRows()-1 do </lua>
+					<lua>code_competition = tClt_Bateau_Performance:GetCellInt('Code_competition', perf)</lua>
+					<lua>code_course = tClt_Bateau_Performance:GetCellInt('Code_course', perf)</lua>
+					<lua>code_phase = tClt_Bateau_Performance:GetCellInt('Code_phase', perf)</lua>
+					<row h="auto"/>
+					<matrix col_start="2" col_end="0">
+						<row h="auto"/>
+						<text col="5" align="center">'Perf '..tostring(perf+1)</text>
+						<text col="30" align="center">GetInfoCompetition(code_competition)</text>
+						<text col="15" align="center">GetLibelleCourse(code_competition, code_course)..' (C'..tostring(code_course)..')'</text>
+						<text col="15" align="center">GetLibellePhase(code_competition, code_course, code_phase)..' (P'..tostring(code_phase)..')'</text>
+						<text col="5" align="right">tClt_Bateau_Performance:GetCell('Point', perf)</text>
+					</matrix>
+				<lua>end</lua>
+			<lua>end</lua>
+			<text col_start="1" row_start="1" row_end="0" align="center" label="Clt" font_weight="bold">$(Clt)</text>
+			<lua>if detail == 1 and group == 'body' then </lua>
+				<row h="0.25cm" />
+			<lua>end</lua>
+	
+		</body>
+	</report>
+	
+</edition>

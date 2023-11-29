@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- S Verdier 10.2023  -->
+<!-- Permet d'exporter sous forme de tableau les résultats au format ICF demandé  -->
+<!-- Utiliser la fonction export Excel => Données de la grille pour obtenir le fichier. L'affichage pdf ne sert à rien -->
+
+<edition>
+  <menu>
+    <menu title="Résultats" image="./res/16x16_info.png">
+      <menu title="ICF Fichier Export classement" image="./res/16x16_official.png" id="Export_ICF" officiel="1"/>
+    </menu>
+  </menu>
+
+
+  <report id="Export_ICF">
+    <lua>			
+			title="Résultats ExportICF - Faire Imprimante => Excel => Données de la grille" 
+      txtCourse = tostring(code_course)
+
+    </lua>
+    <!-- Calcul pour la Qualif on prend la 2 sinon la 1, calcul du nom Phase max  -->
+    <lua>
+	    body:AddColumn({ name = 'Phase', type = sqlType.TEXT });
+	    body:AddColumn({ name = 'HeatRank', type = sqlType.TEXT });
+	    body:AddColumn({ name = 'HeatTime', type = sqlType.TEXT });
+	    body:AddColumn({ name = 'HeatPena', type = sqlType.TEXT });
+	    body:AddColumn({ name = 'HeatTotal', type = sqlType.TEXT });
+
+			for j=0,body:GetNbRows()-1 do
+          if ( body:GetCell( "Cltc"..txtCourse..'_2', j) == "") then
+              body:SetCell('HeatRank',j, body:GetCell('Cltc'..txtCourse..'_1', j))	
+              body:SetCell('HeatTime',j, body:GetCell('Tps_chrono'..txtCourse..'_1', j, '[P10]%xs,%2f'))	
+              body:SetCell('HeatPena',j, GetTotalPenalite(code_course, 1, j))	
+              body:SetCell('HeatTotal',j, body:GetCell('Tps'..txtCourse..'_1', j, '[P10]%xs,%2f'))	
+          else
+              body:SetCell('HeatRank',j, body:GetCell('Cltc'..txtCourse..'_2', j))	
+              body:SetCell('HeatTime',j, body:GetCell('Tps_chrono'..txtCourse..'_2', j, '[P10]%xs,%2f'))	
+              body:SetCell('HeatPena',j, GetTotalPenalite(code_course, 2, j))	
+              body:SetCell('HeatTotal',j, body:GetCell('Tps'..txtCourse..'_2', j, '[P10]%xs,%2f'))	
+          end
+          
+					if ( body:GetCell( "Cltc"..txtCourse..'_4', j) == "") then
+					  if ( body:GetCell( "Cltc"..txtCourse..'_3', j) == "") then
+					    body:SetCell('Phase',j, "HEAT")							
+            else
+					    body:SetCell('Phase',j, "SFNL")							
+            end        
+          else
+            body:SetCell('Phase',j, "FNL-")		
+          end
+			end
+ 		</lua>
+   	<!-- Calcul du Classement  -->
+		<lua>body:AddColumn({ name = 'Clt_Course', type = sqlType.RANKING })
+			 body:SetRanking('Clt_Course','Code_categorie, Tps'..txtCourse..'_4 asc NULL_OK, Tps'..txtCourse..'_3 asc NULL_OK, Tps'..txtCourse..'_2 asc NULL_OK','Code_categorie')
+    </lua>
+
+<order key="('Code_categorie, Tps'..txtCourse..'_4 asc NULL_OK, Tps'..txtCourse..'_3 asc NULL_OK, Tps'..txtCourse..'_2 asc NULL_OK')" />
+
+    <rupture key="Code_categorie">
+      <before>
+        <need h="3cm"/>
+        <font size="14"/>
+        <row h="0.4cm"/>
+        <lua>epreuve = $(Code_categorie)</lua>
+        <text row="auto" col="1">GetEpreuveLabel(epreuve)..' ('..epreuve..')'</text>
+      </before>
+    </rupture>
+    <body>
+      <call option="couleur_alternee" file="./edition/options.xml"/>
+      <font size="8" adjust="ellipsize"/>
+      <padding all="0px"/>
+      <spacing horz="12" vert="5"/>
+      <row h="auto"/>
+
+      <text col="8" align="center"  font_size_step="1" label="ICFeventId"></text>
+      <text col="8" align="center"  font_size_step="1" label="EventCode">epreuve</text>
+
+      <text col="8" align="center"  font_size_step="1" label="SortOrder">row+1</text>
+      <text col="8" align="center"  font_size_step="1" label="Phase">$(Phase)</text>
+
+      <text col="8" align="center" font_weight="bold" font_size_step="1" label="Rank">$(Clt_Course)</text>
+      
+      <text col="8" align="center"  font_size_step="1" label="ICFAthleteid">GetEquipier($(Code_bateau),e,'Matric')</text>
+
+      <text col="8" align="center" font_style="italic" label="Bib">$(Dossard)</text>
+      <text col="14" align="left" font_weight="bold" font_size_step="2" label="FamilyName">GetEquipier($(Code_bateau),e,'Nom')</text>
+      <text col="14" align="left" font_weight="bold" font_size_step="2" label="GivenNamenom">GetEquipier($(Code_bateau),e,'Prenom')</text>
+  
+      <text col="8" align="center"  font_size_step="1" label="Organisationid">$(Code_nation)</text>
+        
+      <text col="7" align="right" label="HeatRank" font_size_step="-1">$(HeatRank)</text>
+      <text col="7" align="right" label="HeatTime" font_size_step="-1">$(HeatTime)</text>
+      <text col="7" align="center" label="HeatPen" font_size_step="-2">$(HeatPena)</text>
+      <text col="7" align="right" label="HeatTotal" font_weight="bold">$(HeatTotal)</text>  
+
+      <lua>for p=3,nb_phase do</lua>
+      <lua> 
+        NPhase = tostring(code_course)..'_'..tostring(p)
+        if p==3 then txtCoursePhase="Semi" end
+        if p==4 then txtCoursePhase="Final" end
+      </lua>
+      <text col="7" align="right" label="(txtCoursePhase..'Rank')" font_size_step="-1">body:GetCell('Cltc'..NPhase, row)</text>
+      <text col="7" align="right" label="(txtCoursePhase..'Time')" font_size_step="-1">body:GetCell('Tps_chrono'..NPhase, row,'[P10]%xs,%2f')</text>
+      <text col="7" align="center" label="(txtCoursePhase..'Pen')" font_size_step="-2">GetTotalPenalite(code_course, p, row)</text>
+      <text col="7" align="right" label="(txtCoursePhase..'Total')" font_weight="bold">body:GetCell('Tps'..NPhase, row, '[P10]%xs,%2f')</text>
+      <lua>end</lua>
+
+    </body>
+  </report>
+</edition>

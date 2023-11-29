@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Editions Activité "SLA" V1.0 Stephane V 7.2023 version sans correction du titre -->
+<?xml version="1.2" encoding="UTF-8"?>
+<!-- Editions Activité "SLA" V1.2 Stephane V 11.2023 version sans correction du titre -->
 <edition>
 	<menu>
 		<menu title="Liste des participants et de départ" image="./res/32x32_chrono.png">
@@ -34,10 +34,10 @@
 				<menu type_res='TotalTime' type_clt_categorie="Age_regroupe" title="Somme de toutes les Phases (sélectionner les phases)" image="./res/16x16_official.png" id="res_best_sum_phase" officiel="1"/>
 			</menu>
 			<menu title="Résultats avec/par âge" image="./res/16x16_info.png">
-				<menu titre = "Résultats Phase" title="Phase avec regroupement d'âge (U15 U18 U23 U34 M35 M45 M55)" type_clt_categorie='Age_regroupe'  image="./res/16x16_official.png" id="res_phase" />
+				<menu titre = "Résultats Phase" title="Phase avec regroupement d'âge (U15 U18 U23 U34 M35)" type_clt_categorie='Age_regroupe'  image="./res/16x16_official.png" id="res_phase" />
 				<menu titre = "Résultats Phase" title="Phase avec les catégories d'âge (P B M C J S V)" type_clt_categorie='Age'  image="./res/16x16_official.png" id="res_phase" />
 				<menu titre = "Résultats Phase" title="Phase avec les catégories d'âge Master" type_clt_categorie='Masters'  image="./res/16x16_official.png" id="res_phase" />
-				<menu titre = "Résultats Phase par catégories d'âge" title="Phase par regroupement d'âge (U15 U18 U23 U34 M35 M45 M55)" clt_par_categorie='1' type_clt_categorie='Age_regroupe' image="./res/16x16_official.png" id="res_phase" />
+				<menu titre = "Résultats Phase par catégories d'âge" title="Phase par regroupement d'âge (U15 U18 U23 U34 M35)" clt_par_categorie='1' type_clt_categorie='Age_regroupe' image="./res/16x16_official.png" id="res_phase" />
 				<menu titre = "Résultats Phase par catégories d'âge" title="Phase par catégories d'âge (P B M C J S V)" clt_par_categorie='1' type_clt_categorie='Age' image="./res/16x16_official.png" id="res_phase" />
 				
 
@@ -47,7 +47,7 @@
 				<menu podium='1' type_clt_categorie='Age_regroupe' titre='Podiums' title="par embarcations" image="./res/16x16_official.png" id="res_phase" />
 				<menu podium='1' type_clt_categorie='Age' clt_par_categorie='1' titre="Podiums par catégories d'âge" title="par catégories d'âge (P B M C J S V)" image="./res/16x16_official.png" id="res_phase" />
 				<menu podium='1' type_clt_categorie='Age_regroupe' clt_par_categorie='1' titre="Podiums par regroupement des catégories d'âge" title="par regroupement de catégorie d'âge (U15 U18 U23 U34 M35)" image="./res/16x16_official.png" id="res_phase" />
-				<menu podium='1'  clt_par_categorie='1' type_clt_categorie='Masters' titre = "Podiums Masters" title="Masters (Sélectionner Q2-DF-F)" image="./res/16x16_official.png" id="res_phase" />
+				<menu podium='1' clt_par_categorie='1' type_clt_categorie='Masters' titre = "Podiums Masters" title="Masters (Sélectionner Q2-DF-F)" image="./res/16x16_official.png" id="res_phase" />
 			</menu>
 		</menu>
 	</menu>
@@ -87,32 +87,7 @@
 		<text row="auto" align="center">title</text>
 		<row h="0.5cm"/>
 	</header>
-	<first_header>
-		<lua>if id:sub(1,4) == 'res_' then</lua>
-			<col w="1,1cm,1"/>
-			<row h="auto"/> 
-			
-			
-			<matrix col_start="1">
-				<!-- Officiels -->
-				<pen color="black" border="0"/>
-				<font name="Calibri" size="9" adjust="max"/>
-				<col w="1,2" />
-				<row h="auto"/>
-				<text col_start="1" align="left" ></text>
-				<text col_start="2" align="left" font_weight="bold" ></text>
-
-				<!-- Affichage du Juge Arbitre si renseigné -->
-				<lua>if GetOfficiel('JUGEA', 'Identite')~="" then </lua>
-				<row h="auto"/>
-				<text col_start="1" align="left" >'Juge Arbitre :'</text>
-				<text col_start="2" align="left" font_weight="bold" >GetOfficiel('JUGEA', 'Identite')</text>
-				<lua>end</lua>
-			</matrix>
-
-		<lua>end</lua>
-		<row value="0.5cm"/>
-	</first_header>
+	<first_header />
 	
 	
 <!--  ************************************************************************************************************************************** -->
@@ -210,10 +185,9 @@
 
 <!-- ************************************************************** -->
 <!-- Tableau de Bord des Horaires -->
-<!--  Version 6/2022  Ok -->
+<!--  Version 6/2022  Ok  -->
 
 	<report id="horaire" title="Tableau de Bord des Horaires" header="1" first_header="0" footer="1">
-		<order key="Numero_club, Bateau" />
 		<body>
 			<call option="couleur_alternee" file="./edition/options.xml"/>
 			<font size="8" adjust="ellipsize"/>
@@ -584,10 +558,10 @@ app.GetAuiMessage():AddLineError(GetEquipier($(Code_bateau),1,'Nom')..' '..$(Fin
 				
 	<!-- Affichage du classement et du classement des catégories -->	
 			<lua>if ((type_clt_categorie=='Age') or (type_clt_categorie=='Age_regroupe')  or (type_clt_categorie=='Masters')) and clt_par_categorie~=1  then </lua>			
-				<text cond="FinaleAB_fusionnee==1 and type_clt_categorie=='Age_regroupe'" col="7" align="right" label="Clt/Cat">$(Clt_final_categorie)..'/'..$(Age_regroupe)</text>
-				<text cond="FinaleAB_fusionnee==1 and type_clt_categorie=='Age'" col="7" align="right" label="Clt/Cat">$(Clt_final_categorie)..'/'..$(Age)</text>
-				<text cond="FinaleAB_fusionnee~=1 and type_clt_categorie=='Age_regroupe'" col="7" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Age_regroupe)</text>
-				<text cond="FinaleAB_fusionnee~=1 and type_clt_categorie=='Age'" col="8" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Age)</text>
+				<text cond="FinaleAB_fusionnee==1 and type_clt_categorie=='Age_regroupe'" col="6" align="right" label="Clt/Cat">$(Clt_final_categorie)..'/'..$(Age_regroupe)</text>
+				<text cond="FinaleAB_fusionnee==1 and type_clt_categorie=='Age'" col="6" align="right" label="Clt/Cat">$(Clt_final_categorie)..'/'..$(Age)</text>
+				<text cond="FinaleAB_fusionnee~=1 and type_clt_categorie=='Age_regroupe'" col="6" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Age_regroupe)</text>
+				<text cond="FinaleAB_fusionnee~=1 and type_clt_categorie=='Age'" col="6" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Age)</text>
 				<text cond="type_clt_categorie=='Masters'" col="8" align="right" label="Clt/Cat">$(Clt_categorie)..'/'..$(Masters)</text>
 			<lua>end</lua>
 
